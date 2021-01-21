@@ -3,14 +3,10 @@
 * 제공하는 웹 페이지 접근을 위해 OTP를 발급받는다.
 * 발급된 OTP는 (24H + 2 * Network Delay)만큼 유지된다.
 
-<pre>
-<code>
-@RequestMapping(value = "/order/getList", method = {RequestMethod.POST,RequestMethod.GET})
-	@ResponseBody	
-	public Map<String, Object> getOrder(@ModelAttribute OrderSearchCondition condition , HttpSession session) throws Exception {
-
-
 ```java
+    @RequestMapping(value = "/order/getList", method = {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody	
+	public Map<String, Object> getOrder(@ModelAttribute OrderSearchCondition condition , HttpSession session) throws Exception {	
 	Map<String, Object> result = Maps.newHashMap();
 	String customer = condition.getCustomer();
 	if (StringUtils.isNotEmpty(customer)) {
@@ -78,6 +74,7 @@
 	
 	return getFormattedResult(true, result);
 }
+    
 ```
 
 
