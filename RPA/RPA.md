@@ -72,6 +72,8 @@ type 안에는 변수를 get,set 할 수 있는 기능이 있다고 보면 이�
 
 
 
+
+
 ###### 0_ExcelStore_v1.0.robot
 
 ![image-20210201163539083](https://user-images.githubusercontent.com/38201897/106436146-1dff5e80-64b7-11eb-9c27-ce7b2872d32f.png)
