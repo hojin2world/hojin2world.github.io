@@ -60,9 +60,13 @@ MCPATH -> Server IP : Port
 
 ----------------
 
-![image-20210201163901399](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210201163901399.png) 각 각의 동작을 처리할 로봇 생성.
+![image-20210201163901399](https://user-images.githubusercontent.com/38201897/106436156-1f308b80-64b7-11eb-85c8-b10faaca95b5.png)각 각의 동작을 처리할 로봇 생성.
 
-![image-20210201163913020](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210201163913020.png) type - > Java의 DTO랑 사용법이 비슷하다. ![image-20210201164052578](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210201164052578.png)
+![image-20210201163901399](https://user-images.githubusercontent.com/38201897/106436159-1fc92200-64b7-11eb-829d-fbc9356d90f9.png)
+
+type - > Java의 DTO랑 사용법이 비슷하다. 
+
+![image-20210201163913020](https://user-images.githubusercontent.com/38201897/106436160-1fc92200-64b7-11eb-8621-0e6133a812f8.png) 
 
 type 안에는 변수를 get,set 할 수 있는 기능이 있다고 보면 이해하기 쉽다. ex ) DTO
 
@@ -70,11 +74,11 @@ type 안에는 변수를 get,set 할 수 있는 기능이 있다고 보면 이�
 
 ###### 0_ExcelStore_v1.0.robot
 
-![image-20210201163539083](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210201163539083.png)
+![image-20210201163539083](https://user-images.githubusercontent.com/38201897/106436146-1dff5e80-64b7-11eb-9c27-ce7b2872d32f.png)
 
-![image-20210201163612099](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210201163612099.png)
+![image-20210201163612099](https://user-images.githubusercontent.com/38201897/106436151-1e97f500-64b7-11eb-89ec-7d7605cd6b9d.png)
 
-![image-20210201163624204](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210201163624204.png)
+![image-20210201163624204](https://user-images.githubusercontent.com/38201897/106436155-1f308b80-64b7-11eb-8d96-4d65f6e9386e.png)
 
 날짜 변수 설정 Variables의 변수 명을 생성해 준 후 value값을 선택 
 value - > converters -> 원하는 날짜 변수 설정 (yyyyMMddmmss , now())
