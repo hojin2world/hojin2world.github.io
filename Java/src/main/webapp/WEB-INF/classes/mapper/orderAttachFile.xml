@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="orderAttachFile">
+	<select id="getList" parameterType="int" resultType="orderAttachFile" >
+		/* orderAttachFile.getList */
+		SELECT seq, original_filename, filename, size 
+		FROM order_attach_files 
+		WHERE orderid = #{value} 
+		ORDER BY seq DESC;
+	</select>
+	
+	<insert id="add" parameterType="orderAttachFile" >
+		/* orderAttachFile.add */
+		INSERT INTO order_attach_files
+		( orderid, userid, original_filename, filename, size, registered, company )
+		VALUES  
+		( #{orderid}, #{userid}, #{original_filename}, #{filename}, #{size}, now(), #{company}) 
+	</insert>
+	
+	<select id="get" parameterType="int" resultType="orderAttachFile">
+		/* orderAttachFile.get */
+		SELECT *   
+		FROM order_attach_files
+		WHERE seq = #{value}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		/* orderAttachFile.delete */
+		DELETE FROM order_attach_files
+		WHERE seq = #{value}
+	</delete>	
+</mapper>

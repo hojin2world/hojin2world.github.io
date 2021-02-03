@@ -1,0 +1,154 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+
+    <context:component-scan base-package="net.fe.buma"/>
+      <!-- @Autowired를  처리하기위해서 application-context.xml에 해당클래스 모두 bean으로 처리하기 번거로우므로 net.fe.buma로 시작하는 패키지 모두를 등록하겠다. -->
+    <context:component-scan base-package="org.springframework.security" />
+    <context:annotation-config></context:annotation-config>    
+    
+    <!--db-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--  property name="typeAliasesPackage" value="net.fe.buma"/ -->
+        <property name="configLocation" value="/WEB-INF/mybatis-config.xml" />
+        <property name="mapperLocations" value="classpath:mappers/*.xml" />
+    </bean>
+    
+    
+
+    <!-- bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://127.0.0.1:3306/buma?useUnicode=true&amp;characterEncoding=UTF-8&amp;cachePrepStmts=true&amp;useServerPrepStmts=true&amp;connectTimeout=3000&amp;socketTimeout=5000&amp;autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;"/>
+        <property name="username" value="master"/>
+        <property name="password" value="0630"/>-->
+        <!-- property name="username" value="heidev"/ -->
+        <!-- property name="password" value="heidev"/ -->
+    <!-- </bean -->
+
+    <!--<bean id="securityConfig" class="net.fe.buma.security.config.SecurityConfig">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>-->
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+		<bean id="orderRequest" class="net.fe.buma.order.model.OrderRequest"></bean>
+
+    <mvc:annotation-driven conversion-service="conversionService" validator="validator">
+        <mvc:message-converters>
+        	<bean class="org.springframework.http.converter.FormHttpMessageConverter">
+                <property name="charset">
+                    <bean class="java.nio.charset.Charset" factory-method="forName">
+                        <constructor-arg value="UTF-8"/>
+                    </bean>
+                </property>
+            </bean>
+            <bean id="httpMessageConverter"
+                  class="net.fe.buma.support.http.converter.MessageMappingJacksonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json</value>
+                        <value>text/*</value>
+                    </list>
+                </property>
+                <property name="objectMapper" ref="objectMapper"/>
+            </bean>
+            <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
+	            <property name="supportedMediaTypes">
+	                <list>
+	                    <value>image/jpeg</value>
+	                    <value>image/gif</value>
+	                    <value>image/png</value>
+	                </list>
+	            </property>
+	        </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <bean id="objectMapper" class="net.fe.buma.support.json.ObjectMapperFactoryBean" />
+
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="net.fe.buma.support.converter.CodeEnumConveterFactory"/>
+                <bean class="net.fe.buma.support.converter.StringToDateTimeConverterFactory"/>
+            </set>
+        </property>
+    </bean>
+
+    <!--mybatis mapper interface scan-->
+    <mybatis:scan base-package="net.fe.buma" />
+
+    <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <bean class="org.springframework.mobile.device.site.SitePreferenceWebArgumentResolver" />
+            <bean class="org.springframework.mobile.device.DeviceWebArgumentResolver" />
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
+
+    <mvc:interceptors>
+        <!-- Resolve the device which has generated the request -->
+        <bean class="org.springframework.mobile.device.DeviceResolverHandlerInterceptor" />
+
+        <!-- User's site preference -->
+        <bean class="org.springframework.mobile.device.site.SitePreferenceHandlerInterceptor" />
+
+        <!-- Redirects users to the device specific site -->
+        <bean class="org.springframework.mobile.device.switcher.SiteSwitcherHandlerInterceptor" factory-method="urlPath">
+            <constructor-arg value="/m" />
+            <constructor-arg value="/" />
+        </bean>
+
+       
+        
+        <!--  browser cache -->
+        <mvc:interceptor>
+			<mvc:mapping path="/file/download/**/*"/>
+			<bean class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+				<property name="cacheSeconds" value="31536000"/>				
+			</bean>
+     	</mvc:interceptor>
+	     	
+
+      <!-- <mvc:exclude-mapping path="/stats/order/responseSheetNo" /> -->
+     	
+	</mvc:interceptors>
+	
+
+    <!-- Device aware view resolving -->
+    <!-- 뷰 이름으로 부터 사용할 View를 Mapping해준다. 여기서는 /WEB-INF/pages/폴더의 .jsp로 끝나는 파일들을 찾아서 매핑해준다. -->
+    <bean id="liteDeviceDelegatingViewResolver" class="org.springframework.mobile.device.view.LiteDeviceDelegatingViewResolver">
+        <constructor-arg>
+            <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                <property name="prefix" value="/WEB-INF/pages/" />
+                <property name="suffix" value=".jsp" />
+                <property name="contentType" value="text/html; charset=UTF-8" />
+            </bean>
+        </constructor-arg>
+        <property name="mobilePrefix" value="m/" />
+        <property name="tabletPrefix" value="/" />
+        <property name="enableFallback" value="true" />
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8" />
+        <!-- 50MB -->
+        <property name="maxUploadSize" value="314572800" />
+    </bean>
+</beans>

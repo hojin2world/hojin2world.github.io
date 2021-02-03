@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderForStats">
+
+	<select id="getOrder" parameterType="_long" resultType="orderForStats">
+		/* orderForStats.getOrder */
+		SELECT * FROM `order_for_stats`
+		WHERE seq = #{value}
+	</select>
+	
+	<select id="getOrderList" parameterType="orderSearchCondition" resultType="orderForStats">
+		/* orderForStats.getOrderList */
+		SELECT STATS.seq,
+		
+		STATS.userid,
+		USERS_C.username username,
+		STATS.designer,
+		USERS_D.username designername,
+		STATS.registered,
+		STATS.sampled_first,
+		STATS.sampled_first_adjust,
+		STATS.designed,
+		STATS.produced,
+		STATS.delivered,
+		STATS.delivered_adjust
+		
+		FROM `order_for_stats` STATS
+		JOIN `order` ORDERS
+		ON STATS.seq = ORDERS.seq 
+		LEFT OUTER JOIN `users` USERS_D
+		ON STATS.designer = USERS_D.userid 
+		LEFT OUTER JOIN `users` USERS_C
+		ON STATS.userid = USERS_C.userid 
+		WHERE date_format(STATS.registered, '%Y-%m-%d') BETWEEN #{fromDate} AND #{toDate}
+		AND STATS.company = #{company}
+		<if test="item != null and item != ''">
+		AND STATS.item = #{item}
+		</if>
+		<if test="userid != null and userid != ''">
+		AND STATS.userid = #{userid}
+		</if>
+		<if test="outlet_detail != null and outlet_detail != ''">
+		AND STATS.outlet_detail = #{outlet_detail}
+		</if>
+		<if test="orderStatus != null and orderStatus != ''">
+		AND ORDERS.order_status = #{orderStatus}
+		</if>
+		ORDER BY STATS.seq DESC
+	</select>
+	
+	<!-- 주문데이터 -->
+	<select id="getOrderListForItemSort" parameterType="orderSearchCondition" resultType="orderForStats">
+		/* orderForStats.getOrderList */
+		SELECT * FROM `order_for_stats`
+		WHERE date_format(`registered`, '%Y-%m-%d') BETWEEN #{fromDate} AND #{toDate}
+		AND `company` = #{company}
+		<if test="item != null and item != ''">
+		AND item = #{item}
+		</if>
+		<if test="userid != null and userid != ''">
+		AND userid = #{userid}
+		</if>
+		<if test="outlet_detail != null and outlet_detail != ''">
+		AND outlet_detail = #{outlet_detail}
+		</if>
+		<if test="orderStatus != null and orderStatus != ''">
+		AND orderStatus = #{orderStatus}
+		</if>
+		ORDER BY `seq` DESC
+	</select>
+	
+	
+	
+	<insert id="insertOrder" parameterType="orderRequest">
+		/* orderForStats.insertOrder */
+		INSERT INTO `order_for_stats`
+			(`seq`, `userid`, `item`, `shape`, `team`, `registered`, `company`)
+		VALUES 
+			(#{seq}, #{userid}, #{item}, #{shape}, #{team}, now(), #{company})
+	</insert>
+	
+	<update id="modifyOrder" parameterType="order">
+		/* orderForStats.modifyOrder */
+		UPDATE `order_for_stats`
+		SET
+			`item` = #{item}, `shape` = #{shape}
+		WHERE `seq` = #{seq}
+	</update>
+	
+	<delete id="deleteOrder" parameterType="_long">
+		/* orderForStats.deleteOrder */
+		DELETE FROM `order_for_stats`
+		WHERE `seq` = #{seq}
+	</delete>
+		
+	<update id="updateOrderStatus" parameterType="String">
+		/* orderForStats.updateOrderStatus */
+		UPDATE `order_for_stats`
+		SET
+			`${statusColumn}` = now(),
+			`${statusUserColumn}` = #{userid}
+		WHERE `seq` = #{seq}
+	</update>
+	
+	<update id="updateRegisteredAdjustTime" parameterType="String">
+		/* orderForStats.updateRegisteredAdjustTime */
+		UPDATE `order_for_stats`
+		SET
+			`registered_adjust` = #{date}
+		WHERE `seq` = #{seq}
+	</update>
+	
+	<update id="updateSampledFirst" parameterType="String">
+		/* orderForStats.updateSampledFirst */
+		UPDATE `order_for_stats`
+		SET
+			`sampled_first` = now(),
+			`designer` = #{designerid}
+		WHERE `seq` = #{seq}
+	</update>
+	
+	<update id="adjustTime" parameterType="adjustTimeRequest">
+		/* orderForStats.adjustTime */
+		UPDATE `order_for_stats`
+		SET
+		<if test="type == 'registered'">
+			`sampled_first_adjust` = #{date}
+		</if>
+		<if test="type == 'delivered'">
+			`delivered_adjust` = #{date}
+		</if>
+		WHERE `seq` = #{seq}
+	</update>
+	
+</mapper>

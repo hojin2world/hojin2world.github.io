@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="product">
+	<select id="getList" parameterType="String" resultType="ProductItem" >
+		SELECT * FROM ${tableName}
+		WHERE company = #{company}
+		<if test="tableName == 'product_item'">
+		AND disabled = 0
+		</if>
+		<if test="parentId != null and parentId != ''">
+		AND parent_id = #{parentId}
+		</if>
+		ORDER BY sequence;
+	</select>
+	
+	<select id="getListForAdmin" parameterType="String" resultType="ProductItem" >
+		SELECT * FROM ${tableName}
+		WHERE company = #{company}
+		<if test="parentId != null and parentId != ''">
+		AND parent_id = #{parentId}
+		</if>
+		ORDER BY sequence;
+	</select>
+	
+	<select id="getCount" parameterType="String" resultType="int" >
+		SELECT COUNT(*) FROM ${tableName}
+		WHERE company = #{company}
+	</select>
+	
+	<insert id="add" parameterType="String" >
+		INSERT INTO ${tableName}
+			( `name`, `sequence`, `parent_id`, `company` )
+		VALUES 
+			( #{name}, #{sequence}, #{parentId}, #{company});
+	</insert>
+	
+	<update id="saveSequence" parameterType="String">
+		UPDATE ${tableName}
+		SET `sequence` = #{sequence}
+		WHERE `id` = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM ${tableName}
+		WHERE `id` = #{id}
+	</delete>
+	
+	<select id="getIdListByParentId" parameterType="String" resultType="Integer">
+		SELECT `id` FROM ${tableName}
+		WHERE parent_id = #{parentId};
+	</select>
+	
+	<delete id="deleteByParentId" parameterType="String">
+		DELETE FROM ${tableName}
+		WHERE parent_id = #{parentId};
+	</delete>
+	
+	<update id="saveDetail" parameterType="productDetail">
+		UPDATE `product_process`
+		<set>
+			<if test="width_type != null ">
+			`width_type` = #{width_type},
+			</if>
+			<if test="height_type != null ">
+			`height_type` = #{height_type},
+			</if>
+			<if test="depth_type != null ">
+			`depth_type` = #{depth_type},
+			</if>
+			<if test="unitprice_type != null ">
+			`unitprice_type` = #{unitprice_type},
+			</if>
+			<if test="price_type != null ">
+			`price_type` = #{price_type},
+			</if>
+			<if test="width != null ">
+			`width` = #{width},
+			</if>
+			<if test="height != null ">
+			`height` = #{height},
+			</if>
+			<if test="depth != null ">
+			`depth` = #{depth},
+			</if>
+			<if test="unitprice != null ">
+			`unitprice` = #{unitprice},
+			</if>
+			<if test="unitprice_min != null ">
+			`unitprice_min` = #{unitprice_min},
+			</if>
+			<if test="unitprice_formula != null ">
+			`unitprice_formula` = #{unitprice_formula},
+			</if>
+			<if test="unitprice_range != null ">
+			`unitprice_range` = #{unitprice_range},
+			</if>
+			<if test="price_range != null ">
+			`price_range` = #{price_range},
+			</if>
+			<if test="unitprice_georise_type != null ">
+			`unitprice_georise_type` = #{unitprice_georise_type},
+			</if>
+			<if test="unitprice_georise_formula != null ">
+			`unitprice_georise_formula` = #{unitprice_georise_formula},
+			</if>
+			<if test="unitprice_georise != null ">
+			`unitprice_georise` = #{unitprice_georise},
+			</if>
+			<if test="item_code != null ">
+			`item_code` = #{item_code},
+			</if>
+			<if test="purchaseprice != null ">
+			`purchaseprice` = #{purchaseprice}
+			</if>
+		</set>
+		WHERE id = #{id};
+	</update>
+	
+	<select id="getDetail" parameterType="Integer" resultType="productDetail">
+		SELECT * FROM `product_process`
+		WHERE `id` = #{value};
+	</select>
+	
+	<update id="updateBackgroundImg" parameterType="String">
+		UPDATE `product_background`
+		SET `image_url` = #{fileName}
+		WHERE `id` = #{id}
+	</update>
+				
+	<select id="getBackgroundImg" parameterType="int" resultType="String">
+		SELECT `image_url` FROM `product_background`
+		WHERE `id` = #{value}
+	</select>
+	 
+	<select id="getItemByName" parameterType="String" resultType="item">
+		SELECT *
+		FROM `product_item`
+		WHERE `name` = #{name}
+		AND `company` = #{company}
+	</select>
+	
+	<select id="getShapeByName" parameterType="String" resultType="shape">
+		SELECT *
+		FROM `product_shape`
+		WHERE `name` = #{name}
+		AND `parent_id` = #{parentId}
+	</select>
+	
+	<select id="getProcessByName" parameterType="String" resultType="process">
+		SELECT *
+		FROM `product_process`
+		WHERE `name` = #{name}
+		AND `parent_id` = #{parentId}
+	</select>
+	
+	<!-- updateProductUse  -->
+	<update id="updateProductUse" parameterType="hashmap">
+		UPDATE `product_item`
+		SET `disabled` = #{disabled}
+		WHERE `id` = #{pid}
+	</update>
+	
+</mapper>
