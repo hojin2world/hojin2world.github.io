@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="order">
+	<select id="getOrders" parameterType="pagable" resultType="order">
+		/* order.getOrders */
+		SELECT `seq`, `userid`, `order_status`, `item`,`item_code`, `shape`, `process`, `background`, `background_id`, `width`, `height`, `depth`, `count`, `price`,`purchase_price`,
+		`sender_postcode`,`sender_address`,`sender_detailaddress`, `sender_name`, `sender_phone`, `depositor`,`bill`,`business_num`, `business_tel`, `business_email`, `receipts_tel`,`workerid`, `description`, `team`, `outlet`,
+			`outlet_detail`, `registered`, `modified`, `past_odr`,`invoice_info`,`invoice_number`,`uniquecd`
+		FROM `order`
+		WHERE `company` = #{company}
+		<if test="isCompanyMaster">
+		AND `userid` != 'admin'
+		</if>
+		<if test="isCompanyEmployee">
+		AND `userid` = #{userid}
+		</if>
+		
+		<if test=" status != null and status != '' and status != 'ALL' ">
+		AND `order_status` = #{status}
+		</if>
+		<if test="searchValue != null and searchValue != ''">
+			<choose>
+				<when test="searchType == 'outlet_detail'">
+				AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%') 
+				</when>
+				<when test="searchType == 'userid'">
+				AND `userid` in
+					<foreach item="searchValueItem" index="index" collection="searchValueList" open="(" separator="," close=")">
+						#{searchValueItem}
+					</foreach>
+				</when>
+				<otherwise>
+				AND ${searchType} = #{searchValue}
+				</otherwise>
+			</choose>
+		</if>
+		ORDER BY seq DESC
+		LIMIT #{offset}, #{pageSize}
+	</select>
+	
+	<select id="getCount" parameterType="pagable" resultType="int">
+		/* order.getCount */
+		SELECT count(1) FROM `order`
+		WHERE `company` = #{company}
+		<if test="isCompanyMaster">
+		AND `userid` != 'admin'
+		</if>
+		<if test="isCompanyEmployee">
+		AND `userid` = #{userid}
+		</if>
+		<if test=" status != null and status != '' and status != 'ALL' ">
+			AND `order_status` = #{status}
+		</if>
+		<if test="searchValue != null and searchValue != ''">
+			<choose>
+				<when test="searchType == 'outlet_detail'">
+				AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%') 
+				</when>
+				<when test="searchType == 'userid'">
+				AND `userid` in
+					<foreach item="searchValueItem" index="index" collection="searchValueList" open="(" separator="," close=")">
+						#{searchValueItem}
+					</foreach>
+				</when>
+				<otherwise>
+				AND ${searchType} = #{searchValue}
+				</otherwise>
+			</choose>
+		</if>
+	</select>
+	
+	<select id="getOrdersHasContent" parameterType="pagable" resultType="order">
+		/* order.getOrdersHasContent */
+		SELECT * FROM `order` a
+		INNER JOIN(
+			SELECT seq as 'order_seq' 
+			FROM `order` 
+			WHERE `company` = #{company}
+			<if test="isCompanyMaster">
+			AND `userid` != 'admin'
+			</if>		
+			<if test="isCompanyEmployee">
+			AND `userid` = #{userid}
+			</if>
+			<if test=" status != null and status != '' and status != 'ALL' ">
+			AND `order_status` = #{status}
+			</if>
+			AND `description` LIKE CONCAT('%', #{searchValue}, '%')
+			
+			UNION
+			
+			SELECT order_seq 
+			FROM `order_comment`
+			WHERE `content` LIKE CONCAT('%', #{searchValue}, '%')	
+			<if test="isCompanyMaster">
+			AND `writer_id` != 'admin'
+			</if>		
+			<if test="isCompanyEmployee">
+			AND `writer_id` = #{userid}
+			</if>
+		) b
+		ON a.seq = b.order_seq
+		WHERE `company` = #{company}
+		<if test=" status != null and status != '' and status != 'ALL' ">
+		AND a.order_status = #{status}
+		</if>
+		ORDER BY seq DESC 
+		LIMIT #{offset}, #{pageSize}		
+	</select>
+	
+	<select id="getCountOrdersHasContent" parameterType="pagable" resultType="int">
+		/* order."getCountOrdersHasContent" */
+		SELECT count(1) FROM `order` a
+		INNER JOIN(
+			SELECT seq as 'order_seq' FROM `order` 
+			WHERE `company` = #{company}
+			<if test="isCompanyMaster">
+			AND `userid` != 'admin'
+			</if>		
+			<if test="isCompanyEmployee">
+			AND `userid` = #{userid}
+			</if>
+			<if test=" status != null and status != '' and status != 'ALL' ">
+			AND `order_status` = #{status}
+			</if>
+			AND `description` LIKE CONCAT('%', #{searchValue}, '%')
+			UNION
+			SELECT order_seq FROM `order_comment`
+			WHERE `content` LIKE CONCAT('%', #{searchValue}, '%')			
+			<if test="isCompanyMaster">
+			AND `writer_id` != 'admin'
+			</if>		
+			<if test="isCompanyEmployee">
+			AND `writer_id` = #{userid}
+			</if>
+		) b
+		ON a.seq = b.order_seq	
+		WHERE `company` = #{company}
+		<if test=" status != null and status != '' and status != 'ALL' ">
+		AND a.order_status = #{status}
+		</if>		
+	</select>
+	
+	<select id="getOrdersByStatus" parameterType="pagable" resultType="order">
+		/* order.getOrdersByStatus */
+		SELECT `seq`, `userid`, `order_status`, `item`,`item_code`, `shape`, `process`, `background`, `background_id`, `width`, 
+			`height`, `depth`, `count`, `price`,`purchase_price`,`sender_postcode`,`sender_address`,`sender_detailaddress`, `sender_name`, `sender_phone`, 
+			`depositor`,`bill`, `business_num`, `business_tel`, `business_email`, `receipts_tel`, `workerid`, `description`, `team`, `outlet`, `outlet_detail`, `invoice_info`, `invoice_number`,`uniquecd`, `registered`, `modified`
+		FROM `order` 
+		WHERE `company` = #{company}
+		<if test="isCompanyMaster">
+		AND `userid` != 'admin'
+		</if>
+		<if test="isCompanyEmployee">
+		AND `userid` = #{userid}
+		</if>
+		AND `order_status` = #{status}
+		<if test="searchValue != null and searchValue != ''">
+			<choose>
+				<when test="searchType == 'outlet_detail'">
+				AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%') 
+				</when>
+				<when test="searchType == 'userid'">
+				AND `userid` in
+					<foreach item="searchValueItem" index="index" collection="searchValueList" open="(" separator="," close=")">
+						#{searchValueItem}
+					</foreach>
+				</when>
+				<otherwise>
+				AND ${searchType} = #{searchValue}
+				</otherwise>
+			</choose>
+		</if>
+		ORDER BY seq DESC LIMIT ${offset}, ${pageSize}
+	</select>
+	
+	<select id="getCountByStatus" parameterType="String" resultType="_long">
+		/* order.getCountByStatus */
+		SELECT count(1) FROM `order` 
+		WHERE `company` = #{company}
+		<if test="isCompanyMaster">
+		AND `userid` != 'admin'
+		</if>
+		<if test="isCompanyEmployee">
+		AND `userid` = #{userid}
+		</if>
+		AND order_status = #{status}
+		<if test="searchValue != null and searchValue != ''">
+			<choose>
+				<when test="searchType == 'outlet_detail'">
+				AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%') 
+				</when>
+				<when test="searchType == 'userid'">
+				AND `userid` in
+					<foreach item="searchValueItem" index="index" collection="searchValueList" open="(" separator="," close=")">
+						#{searchValueItem}
+					</foreach>
+				</when>
+				<otherwise>
+				AND ${searchType} = #{searchValue}
+				</otherwise>
+			</choose>
+		</if>
+	</select>
+	
+	<select id="getOrder" parameterType="int" resultType="order">
+		/* order.getOrder */
+		SELECT `seq`, `userid`, `order_status`, `item`,`item_code`, `shape`, `process`, `background`, `background_id`,
+			`width`, `height`, `depth`, `count`, `price`, `purchase_price`,`sender_postcode`, `sender_address`,`sender_detailaddress`, `sender_name`,`sender_phone`,
+			`depositor`, `bill`, `business_num`, `business_tel`, `business_email`, `receipts_tel`, `workerid`, `description`, `team`, `outlet`, `unitprice`,`purchaseprice`,
+			`outlet_detail`, `registered`, `modified`, `company`, `past_odr`,`invoice_info`,`invoice_number`,`uniquecd`
+		FROM `order`  
+		WHERE seq = #{value}
+	</select>
+	
+	<insert id="upsertOrder" parameterType="orderRequest">
+		/* order.upsertOrder */
+		INSERT INTO `order`
+			( `order_status`, `userid`, `item`,`item_code`, `shape`, `process`, `background`, `background_id`, `width`, `height`, 
+			  `depth`, `count`, `price`, `purchase_price`, `sender_postcode`,`sender_address`,`sender_detailaddress`, `sender_name`, `sender_phone`,`depositor`,`bill`, `business_num`, `business_tel`, `business_email`, `receipts_tel`, `workerid`,
+			  `description`, `team`, `outlet`, `unitprice`,`purchaseprice`, `outlet_detail`, `registered`, `modified`, `company`)
+		VALUES (
+			#{order_status}, #{userid}, #{item}, #{item_code}, #{shape}, #{process}, #{background}, #{background_id}, #{width},
+			#{height}, #{depth}, #{count}, #{price}, #{purchase_price}, #{sender_postcode}, #{sender_address},#{sender_detailaddress}, #{sender_name}, #{sender_phone}, #{depositor}, #{bill}, #{business_num}, #{business_tel}, #{business_email}, #{receipts_tel},
+			#{workerid}, #{description}, #{team}, #{outlet}, #{outlet_detail}, now(), now(), #{company})
+		ON DUPLICATE KEY UPDATE
+			`order_status` = #{order_status}, `userid` = #{userid}, `item` = #{item}, `item_code` = #{item_code}, `shape` = #{shape}, `process` = #{process}, `background` = #{background}, `background_id` = #{background_id}, `width` = #{width},
+			`height` = #{height}, `depth` = #{depth}, `count` = #{count}, `price` = #{price}, `purchase_price` = #{purchase_price}, `sender_postcode` = #{sender_postcode}, `sender_address` = #{sender_address},
+      `sender_detailaddress` = #{sender_detailaddress}, `unitprice` = #{unitprice},`purchaseprice` = #{purchaseprice},
+			`sender_name` = #{sender_name}, `sender_phone` = #{sender_phone}, `depositor`=#{depositor}, `bill`=#{bill} ,`business_num`=#{business_num}, `business_tel`=#{business_tel}, `business_email`=#{business_email}, `receipts_tel`=#{receipts_tel} , `workerid` = #{workerid}, `description` = #{description},
+			`team` = #{team}, `outlet` = #{outlet}, `outlet_detail` = #{outlet_detail}, `invoice_info` = #{invoice_info}, `invoice_number` = #{invoice_number},`uniquecd` = #{uniquecd}, `modified` = now();
+	</insert>
+	
+	<insert id="updateOrder" parameterType="orderRequest">
+		/* order.updateOrder */
+		UPDATE `order` 
+		SET 
+			`order_status` = #{order_status}, `userid` = #{userid}, `item` = #{item},`item_code` = #{item_code}, `shape` = #{shape}, `process` = #{process}, `background` = #{background}, `background_id` = #{background_id}, `width` = #{width}, `height` = #{height},
+			`depth` = #{depth}, `count` = #{count}, `price` = #{price}, `purchase_price` = #{purchase_price}, `sender_postcode` = #{sender_postcode} , `sender_address` = #{sender_address},`sender_detailaddress` = #{sender_detailaddress}, `sender_name` = #{sender_name},`sender_phone` = #{sender_phone}, `depositor`=#{depositor}, `bill`=#{bill} , `business_num`=#{business_num}, `business_tel`=#{business_tel}, `business_email`=#{business_email}, `receipts_tel`=#{receipts_tel} , `unitprice` = #{unitprice}, `purchaseprice` = #{purchaseprice},
+			`workerid` = #{workerid}, `description` = #{description}, `team` = #{team},
+			`outlet` = #{outlet}, `outlet_detail` = #{outlet_detail}, `invoice_info` = #{invoice_info}, `invoice_number` = #{invoice_number}, `uniquecd` = #{uniquecd}, `modified` = now()
+		WHERE `seq` = #{seq};
+	</insert>
+	
+	<insert id="updateOrderStatus" parameterType="orderRequest">
+		/* order.updateOrderStatus */
+		UPDATE `order` 
+		SET 
+			`order_status` = #{order_status}, `modified` = now()
+		WHERE `seq` = #{seq};
+	</insert>
+	
+	<insert id="insertOrder" parameterType="orderRequest" useGeneratedKeys="true" keyProperty="seq">
+		/* order.insertOrder */
+		INSERT INTO `order`
+			( `order_status`, `userid`, `item`,`item_code`, `shape`, `process`, `background`, `background_id`, `width`, `height`, `depth`, `count`, `price`,`purchase_price`,
+				`sender_postcode`,`sender_address`, `sender_detailaddress`, `sender_name`, `sender_phone`,`depositor`,`bill`, `business_num`, `business_tel`, `business_email`, `receipts_tel`, `workerid`, `description`, `team`, `unitprice`,`purchaseprice`, `unitprice_georise`,
+				`outlet`, `outlet_detail`, `registered`, `modified`, `company`, `past_odr`)
+			VALUES (
+				#{order_status}, #{userid}, #{item},#{item_code}, #{shape}, #{process}, #{background}, #{background_id}, #{width}, #{height}, #{depth}, #{count}, #{price}, #{purchase_price},
+				#{sender_postcode} , #{sender_address}, #{sender_detailaddress}, #{sender_name}, #{sender_phone}, #{depositor}, #{bill},  #{business_num}, #{business_tel}, #{business_email}, #{receipts_tel}, #{workerid}, #{description}, #{team}, #{unitprice}, #{purchaseprice}, #{unitprice_georise},
+				#{outlet}, #{outlet_detail}, now(), now(), #{company}, #{past_odr});
+	</insert>
+	
+	<select id="getOrderSummary" parameterType="String">
+		/* order.getOrderSummary */
+		SELECT 
+			count(case when order_status = 'L1' then 1 END) as l1,
+			count(case when order_status = 'L2' then 1 END) as l2,
+			count(case when order_status = 'L3' then 1 END) as l3,
+			count(case when order_status = 'L4' then 1 END) as l4,
+			count(case when order_status = 'L5' then 1 END) as l5,
+			count(case when order_status = 'L6' then 1 END) as l6,
+			count(case when order_status = 'L7' then 1 END) as l7
+		FROM `order`
+		WHERE `company` = #{value}
+    	OrderSummary getOrderSummary();
+	</select>
+	
+	<select id="getOrderByDate" parameterType="String" resultType="orderRequest">
+		/* order.getOrderByDate */
+		SELECT * FROM `order` 
+		WHERE `company` = #{company}
+		AND registered like CONCAT('%', #{date}, '%');
+	</select>
+	
+	<select id="getUserIdByOrderSeq" parameterType="String" resultType="String">
+		/* order.getUserIdByOrderSeq */
+		SELECT userid FROM `order`
+		WHERE seq = #{value}
+	</select>
+	
+	<select id="getDesignerId" parameterType="_long" resultType="String">
+		/* order.getDesignerId */
+		SELECT workerid FROM `order`
+		WHERE seq = #{value};
+	</select>
+	
+	<select id="getOrderByDateAndId" parameterType="Map" resultType="orderRequest">
+		/* order.getOrderByDateAndId */
+		SELECT * FROM `order` 
+		WHERE  registered like CONCAT('%', #{Date}, '%')  
+		AND `userid` = #{userId}
+		AND `company` = #{company};
+	</select>
+	
+    <insert id="submitModifyOrder" parameterType="order" >
+    	/* order.submitModifyOrder */
+		UPDATE `order` SET 
+			`item` = #{item}, `item_code` = #{item_code},`shape` = #{shape}, `process` = #{process}, `background` = #{background}, `background_id` = #{background_id}, `width` = #{width}, `height` = #{height},
+			`depth` = #{depth}, `count` = #{count}, `price` = #{price}, `purchase_price` = #{purchase_price},`sender_postcode` = #{sender_postcode}, `sender_address` = #{sender_address},`sender_detailaddress` = #{sender_detailaddress}, `sender_name` = #{sender_name},`sender_phone` = #{sender_phone}, `unitprice` = #{unitprice}, `purchaseprice` = #{purchaseprice} , `unitprice_georise` = #{unitprice_georise},
+			`sender_phone` = #{sender_phone}, `depositor`= #{depositor}, `bill`= #{bill} , `business_num`=#{business_num}, `business_tel`=#{business_tel}, `business_email`=#{business_email}, `receipts_tel`= #{receipts_tel}, `description` = #{description}, `team` = #{team},
+			`outlet` = #{outlet}, `outlet_detail` = #{outlet_detail},  `invoice_info` = #{invoice_info}, `invoice_number` = #{invoice_number},`uniquecd` = #{uniquecd}, `modified` = now()
+			WHERE `seq` = #{seq}
+    </insert>
+    
+     <insert id="setWorker" parameterType="order" >
+    	/* order.setWorker */
+		UPDATE `order` SET 
+			`workerid` = #{workerid}, `modified` = now()
+			WHERE `seq` = #{seq}
+    </insert>
+    
+    <select id="getWorker" parameterType="int" resultType="String">
+    	/* order.getWorker */
+    	SELECT workerid FROM `order`
+    	WHERE `seq` = #{value}		 
+    </select>
+    
+    <select id="getPastOrderById" parameterType="pagable" resultType="order">
+		/* order.getPastOrderById */
+		SELECT `seq`, `userid`, `order_status`, `item`, `item_code`, `shape`, `process`, `background`, `background_id`, `width`, `height`, `depth`, `count`, `price`,`purchase_price`,
+        	`sender_postcode`, `sender_address`, `sender_detailaddress` , `sender_name`, `sender_phone`, `depositor`, `bill` , `business_num`, `business_tel`, `business_email`, `receipts_tel` ,`workerid`, `description`, `team`, `outlet`,
+			`outlet_detail`, `registered`, `modified` 
+		FROM `order`
+		WHERE `company` = #{company} AND `userid` = #{userid}
+		<if test="searchValue != null and searchValue != ''">
+		AND ${searchType} = #{searchValue}
+		</if>
+		ORDER BY seq DESC 
+		LIMIT #{offset}, #{pageSize}
+	</select>
+	
+	<select id="getTotalCountById" parameterType="String" resultType="int">
+		/* order.getTotalCountById */
+		SELECT count(*) FROM `order`
+		WHERE `company` = #{company} AND `userid` = #{userid}
+		<if test="searchValue != null and searchValue != ''">
+		AND ${searchType} = #{searchValue}
+		</if>
+	</select>
+	
+	<delete id="delete" parameterType="_long">
+		/* order.delete */
+		DELETE FROM `order`
+		WHERE seq = #{value}
+	</delete>
+	
+	<select id="getCurrentPageBySeq" parameterType="pagable" resultType="int">
+		/* order.getCurrentPageBySeq */
+		SELECT count(*) FROM `order`
+		WHERE `company` = #{company}
+		<if test="isCompanyMaster">
+		AND userid != 'admin'
+		</if>
+		<if test="isCompanyEmployee">
+		AND userid = #{userid}
+		</if>
+		<if test="status != null and status != '' and status != 'all'">
+		AND order_status = #{status}
+		</if>
+		<if test="searchValue != null and searchValue != ''">
+			<choose>
+				<when test="searchType == 'outlet_detail'">
+				AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%') 
+				</when>
+				<when test="searchType == 'userid'">				
+				AND `userid` in
+					<foreach item="searchValueItem" index="index" collection="searchValueList" open="(" separator="," close=")">
+						#{searchValueItem}
+					</foreach>
+				</when>
+				<otherwise>
+				AND ${searchType} = #{searchValue}
+				</otherwise>
+			</choose>
+		</if>
+		AND seq > #{seq}
+	</select>
+	
+	<select id="getCurrentPageBySeqHasContent" parameterType="pagable" resultType="int">
+	SELECT count(*) FROM `order` a
+		INNER JOIN(
+			SELECT seq as 'order_seq' FROM `order` 
+			WHERE `company` = #{company}
+			<if test="isCompanyMaster">
+			AND `userid` != 'admin'
+			</if>
+			<if test="isCompanyEmployee">
+			AND `userid` = #{userid}
+			</if>
+			AND `description` LIKE CONCAT('%', #{searchValue}, '%')
+			UNION
+			SELECT order_seq FROM `order_comment`
+			WHERE `content` LIKE CONCAT('%', #{searchValue}, '%')			
+			<if test="isCompanyMaster">
+			AND `writer_id` != 'admin'
+			</if>
+			<if test="isCompanyEmployee">
+			AND `writer_id` = #{userid}
+			</if>
+			
+		) b
+		ON a.seq = b.order_seq
+	WHERE seq > #{seq}	
+	</select>
+	
+	<insert id="updateSheetNo" parameterType="hashmap">
+		UPDATE `order` SET 
+		 `invoice_info` = #{deliverCode} ,`invoice_number` = #{sheetNo} , `uniquecd` = #{uniqueCd} where seq = #{transUniqueCd}
+    </insert>
+</mapper>
