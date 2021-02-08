@@ -5,8 +5,9 @@
 텍스트 파일로 만들어져 있는 웹 문서를 브라우저에 렌더링하려면 웹 문서를 브라우저가 이해할 수 있는 구조로 메모리에 올려야 한다. 브라우저의 렌더링 엔진은 웹 문서를 로드한 후, 파싱하여 웹 문서를 브라우저가 이해할 수 있는 구조로 구성하여 메모리에 적재하는데 이를 DOM이라 한다. 즉 모든 요소와 요소의 어트리뷰트, 텍스트를 각각의 객체로 만들고 이들 객체를 부자 관계를 표현할 수 있는 트리 구조로 구성한 것이 DOM이다. 이 DOM은 자바스크립트를 통해 동적으로 변경할 수 있으며 변경된 DOM은 렌더링에 반영된다.
 
 
+![client-server](https://user-images.githubusercontent.com/38201897/107194819-ea32b480-6a33-11eb-9784-02f2d53999a9.png)
 
-![client-server](C:\Users\Administrator\Documents\GitHub\hojin2world.github.io\JavaScript\img\client-server.png)
+
 
 이러한 웹 문서의 동적 변경을 위해 DOM은 프로그래밍 언어가 자신에 접근하고 수정할 수 있는 방법을 제공하는데 일반적으로 프로퍼티와 메소드를 갖는 자바스크립트 객체로 제공된다. 이를 DOM API(Application Programming Interface)라고 부른다. 달리 말하면 정적인 웹페이지에 접근하여 동적으로 웹페이지를 변경하기 위한 유일한 방법은 메모리 상에 존재하는 DOM을 변경하는 것이고, 이때 필요한 것이 DOM에 접근하고 변경하는 프로퍼티와 메소드의 집합인 DOM API이다.
 
@@ -24,7 +25,7 @@ DOM은 모델 내의 각 객체에 접근하고 수정할 수 있는 프로퍼�
 
 
 
-#### DOM Tree
+### DOM Tree
 
 DOM tree는 브라우저가 HTML 문서를 로드한 후 파싱하여 생성하는 모델을 의미한다. 객체의 트리로 구조화되어 있기 때문에 DOM tree라 부른다.
 
@@ -51,7 +52,8 @@ DOM tree는 브라우저가 HTML 문서를 로드한 후 파싱하여 생성하�
 </html>
 ````
 
-![dom-tree](C:\Users\Administrator\Documents\GitHub\hojin2world.github.io\JavaScript\img\dom-tree.png)
+
+![dom-tree](https://user-images.githubusercontent.com/38201897/107194831-eb63e180-6a33-11eb-95b0-08d1ed99757e.png)
 
 
 
@@ -75,7 +77,9 @@ DOM tree는 네 종류의 노드로 구성된다.
 | ------------------------------------------------------------ |
 | 텍스트 노드는 HTML 요소의 텍스트를 1표현한다. 텍스트 노드는 요소 노드의 자식이며 자신의 자식 노드를 가질 수 없다. 즉, 텍스트 노드는 DOM tree의 최종단이다. |
 
-![HTMLElement](C:\Users\Administrator\Documents\GitHub\hojin2world.github.io\JavaScript\img\HTMLElement.png)
+
+![HTMLElement](https://user-images.githubusercontent.com/38201897/107194832-ebfc7800-6a33-11eb-9046-d6b2062c9091.png)
+
 
 DOM을 통해 웹페이지를 조작(manipulate)하기 위해서는 다음과 같은 수순이 필요하다.
 
@@ -86,11 +90,11 @@ DOM을 통해 웹페이지를 조작(manipulate)하기 위해서는 다음과 �
 
 
 
-#### DOM Query / Traversing (요소에의 접근)
+### DOM Query / Traversing (요소에의 접근)
 
 하나의 요소 노드 선택(DOM Query)
 
-![select-an-individual-element-node](C:\Users\Administrator\Documents\GitHub\hojin2world.github.io\JavaScript\img\select-an-individual-element-node.png)
+![select-an-individual-element-node](https://user-images.githubusercontent.com/38201897/107194841-ed2da500-6a33-11eb-80de-7ec256c1cc07.png)
 
 document.getElementById(id)
 
@@ -233,9 +237,9 @@ const elems = document.querySelectorAll('li.red');
 
 
 
-#### DOM Traversing
+### DOM Traversing
 
-![traversing](C:\Users\Administrator\Documents\GitHub\hojin2world.github.io\JavaScript\img\traversing.png)
+![traversing](https://user-images.githubusercontent.com/38201897/107194843-edc63b80-6a33-11eb-844e-3f07d29e2db9.png)
 
 
 
@@ -330,13 +334,15 @@ if (elem.hasChildNodes()) {
 
 
 
-#### DOM Manipulation(조작)
+### DOM Manipulation(조작)
 
-##### 텍스트 노드에의 접근/수정
+#### 텍스트 노드에의 접근/수정
 
 
 
-![nodeValue](C:\Users\Administrator\Documents\GitHub\hojin2world.github.io\JavaScript\img\nodeValue.png)
+
+![nodeValue](https://user-images.githubusercontent.com/38201897/107194837-ed2da500-6a33-11eb-945a-9e3a125f26d4.png)
+
 
 
 
@@ -378,11 +384,13 @@ textNode.nodeValue = 'Pusan';
 
 
 
-##### 어트리뷰트 노드의 접근/수정
+#### 어트리뷰트 노드의 접근/수정
 
 
 
-![nodeValue](C:\Users\Administrator\Documents\GitHub\hojin2world.github.io\JavaScript\img\nodeValue.png)
+
+![nodeValue](https://user-images.githubusercontent.com/38201897/107194837-ed2da500-6a33-11eb-945a-9e3a125f26d4.png)
+
 
 
 
@@ -510,11 +518,12 @@ console.log(heading.id); // heading
 
 
 
-##### HTML 컨텐츠 조작(Manipulation)
+#### HTML 컨텐츠 조작(Manipulation)
 
 
 
-![innerHTML](C:\Users\Administrator\Documents\GitHub\hojin2world.github.io\JavaScript\img\innerHTML.png)
+![innerHTML](https://user-images.githubusercontent.com/38201897/107194833-ec950e80-6a33-11eb-8aa7-36c0a128ef09.png)
+<img width="251" alt="insertAdjacentHTML-position" src="https://user-images.githubusercontent.com/38201897/107194835-ec950e80-6a33-11eb-8140-de6a909054a7.png">
 
 
 
@@ -631,7 +640,7 @@ elem.innerHTML = '<img src="#" onerror="alert(\'XSS\')">';
 
 
 
-##### DOM 조작 방식
+### DOM 조작 방식
 
 innerHTML 프로퍼티를 사용하지 않고 새로운 콘텐츠를 추가할 수 있는 방법은 DOM을 직접 조작하는 것이다. 한 개의 요소를 추가하는 경우 사용한다. 이 방법은 다음의 수순에 따라 진행한다.
 
@@ -680,7 +689,7 @@ container.removeChild(removeElem);
 
 
 
-##### insertAdjacentHTML()
+### insertAdjacentHTML()
 
 | [insertAdjacentHTML(position, string)](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML) |
 | ------------------------------------------------------------ |
@@ -699,7 +708,7 @@ one.insertAdjacentHTML('beforeend', '<em class="blue">, Korea</em>');
 
 
 
-##### innerHTML vs DOM조작방식 vs insertAdjacentHTML
+### innerHTML vs DOM조작방식 vs insertAdjacentHTML
 
 **innerHTML**
 
@@ -730,7 +739,7 @@ innerHTML과 insertAdjacentHTML()은 크로스 스크립팅 공격(XSS: Cross-Si
 
 
 
-#### style
+### style
 
 style 프로퍼티를 사용하면 inline 스타일 선언을 생성한다. 특정 요소에 inline 스타일을 지정하는 경우 사용한다.
 
