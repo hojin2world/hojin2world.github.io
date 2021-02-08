@@ -523,7 +523,7 @@ console.log(heading.id); // heading
 
 
 ![innerHTML](https://user-images.githubusercontent.com/38201897/107194833-ec950e80-6a33-11eb-8aa7-36c0a128ef09.png)
-<img width="251" alt="insertAdjacentHTML-position" src="https://user-images.githubusercontent.com/38201897/107194835-ec950e80-6a33-11eb-8140-de6a909054a7.png">
+
 
 
 
@@ -695,7 +695,7 @@ container.removeChild(removeElem);
 | ------------------------------------------------------------ |
 | 인자로 전달한 텍스트를 HTML로 파싱하고 그 결과로 생성된 노드를 DOM 트리의 지정된 위치에 삽입한다. 첫번째 인자는 삽입 위치, 두번째 인자는 삽입할 요소를 표현한 문자열이다. 첫번째 인자로 올 수 있는 값은 아래와 같다.  <br />‘beforebegin’ <br />‘afterbegin’ <br />‘beforeend’ <br />‘afterend’ <br /><br />모든 브라우저에서 동작한다. |
 
-![insertAdjacentHTML-position](C:\Users\Administrator\Documents\GitHub\hojin2world.github.io\JavaScript\img\insertAdjacentHTML-position.png)
+![insertAdjacentHTML-position](https://user-images.githubusercontent.com/38201897/107194835-ec950e80-6a33-11eb-8140-de6a909054a7.png)
 
 ​                                           insertAdjacentHTML 메소드의 position parameter
 
