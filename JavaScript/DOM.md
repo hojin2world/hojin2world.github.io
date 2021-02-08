@@ -25,7 +25,7 @@ DOM은 모델 내의 각 객체에 접근하고 수정할 수 있는 프로퍼�
 
 
 
-#### DOM Tree
+### DOM Tree
 
 DOM tree는 브라우저가 HTML 문서를 로드한 후 파싱하여 생성하는 모델을 의미한다. 객체의 트리로 구조화되어 있기 때문에 DOM tree라 부른다.
 
@@ -90,7 +90,7 @@ DOM을 통해 웹페이지를 조작(manipulate)하기 위해서는 다음과 �
 
 
 
-#### DOM Query / Traversing (요소에의 접근)
+### DOM Query / Traversing (요소에의 접근)
 
 하나의 요소 노드 선택(DOM Query)
 
@@ -237,7 +237,7 @@ const elems = document.querySelectorAll('li.red');
 
 
 
-#### DOM Traversing
+### DOM Traversing
 
 ![traversing](https://user-images.githubusercontent.com/38201897/107194843-edc63b80-6a33-11eb-844e-3f07d29e2db9.png)
 
@@ -334,13 +334,15 @@ if (elem.hasChildNodes()) {
 
 
 
-#### DOM Manipulation(조작)
+### DOM Manipulation(조작)
 
-##### 텍스트 노드에의 접근/수정
+#### 텍스트 노드에의 접근/수정
 
 
 
-![nodeValue](C:\Users\Administrator\Documents\GitHub\hojin2world.github.io\JavaScript\img\nodeValue.png)
+
+![nodeValue](https://user-images.githubusercontent.com/38201897/107194837-ed2da500-6a33-11eb-945a-9e3a125f26d4.png)
+
 
 
 
@@ -382,11 +384,13 @@ textNode.nodeValue = 'Pusan';
 
 
 
-##### 어트리뷰트 노드의 접근/수정
+#### 어트리뷰트 노드의 접근/수정
 
 
 
-![nodeValue](C:\Users\Administrator\Documents\GitHub\hojin2world.github.io\JavaScript\img\nodeValue.png)
+
+![nodeValue](https://user-images.githubusercontent.com/38201897/107194837-ed2da500-6a33-11eb-945a-9e3a125f26d4.png)
+
 
 
 
@@ -508,7 +512,7 @@ console.log(heading.id); // heading
 
 
 
-##### HTML 컨텐츠 조작(Manipulation)
+#### HTML 컨텐츠 조작(Manipulation)
 
 
 
@@ -626,7 +630,7 @@ elem.innerHTML = '<img src="#" onerror="alert(\'XSS\')">';
 
 
 
-##### DOM 조작 방식
+### DOM 조작 방식
 
 innerHTML 프로퍼티를 사용하지 않고 새로운 콘텐츠를 추가할 수 있는 방법은 DOM을 직접 조작하는 것이다. 한 개의 요소를 추가하는 경우 사용한다. 이 방법은 다음의 수순에 따라 진행한다.
 
@@ -669,7 +673,7 @@ container.removeChild(removeElem);
 
 
 
-##### insertAdjacentHTML()
+### insertAdjacentHTML()
 
 | [insertAdjacentHTML(position, string)](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML) |
 | ------------------------------------------------------------ |
@@ -688,7 +692,7 @@ one.insertAdjacentHTML('beforeend', '<em class="blue">, Korea</em>');
 
 
 
-##### innerHTML vs DOM조작방식 vs insertAdjacentHTML
+### innerHTML vs DOM조작방식 vs insertAdjacentHTML
 
 **innerHTML**
 
@@ -719,7 +723,7 @@ innerHTML과 insertAdjacentHTML()은 크로스 스크립팅 공격(XSS: Cross-Si
 
 
 
-#### style
+### style
 
 style 프로퍼티를 사용하면 inline 스타일 선언을 생성한다. 특정 요소에 inline 스타일을 지정하는 경우 사용한다.
 
