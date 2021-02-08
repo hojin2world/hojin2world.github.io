@@ -437,14 +437,20 @@ heading.id = 'heading';
 console.log(heading.id); // heading
 ````
 
-| **[hasAttribute(attribute)](https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttribute)** |
+| [hasAttribute(attribute)](https://developer.mozilla.org/en-US/docs/Web/API/Element/hasAttribute) |
 | ------------------------------------------------------------ |
-| 지정한 어트리뷰트를 가지고 있는지 검사한다. <br />Return : Boolean <br />IE8 이상의 브라우저에서 동작한다. |
-| **[getAttribute(attribute)](https://developer.mozilla.org/ko/docs/Web/API/Element/getAttribute)** |
+| 지정한 어트리뷰트를 가지고 있는지 검사한다.<br />Return : Boolean <br />IE8 이상의 브라우저에서 동작한다. |
+
+| [getAttribute(attribute)](https://developer.mozilla.org/ko/docs/Web/API/Element/getAttribute) |
+| ------------------------------------------------------------ |
 | 어트리뷰트의 값을 취득한다. <br />Return : 문자열 <br />모든 브라우저에서 동작한다. |
-| **[setAttribute(attribute, value)](https://developer.mozilla.org/ko/docs/Web/API/Element/setAttribute)** |
+
+| [setAttribute(attribute, value)](https://developer.mozilla.org/ko/docs/Web/API/Element/setAttribute) |
+| ------------------------------------------------------------ |
 | 어트리뷰트와 어트리뷰트 값을 설정한다. <br />Return : undefined <br />모든 브라우저에서 동작한다. |
-| **[removeAttribute(attribute)](https://developer.mozilla.org/ko/docs/Web/API/Element/removeAttribute)** |
+
+| [removeAttribute(attribute)](https://developer.mozilla.org/ko/docs/Web/API/Element/removeAttribute) |
+| ------------------------------------------------------------ |
 | 지정한 어트리뷰트를 제거한다. <br />Return : undefined <br />모든 브라우저에서 동작한다. |
 
 ````javascript
@@ -571,9 +577,13 @@ HTML 콘텐츠를 조작(Manipulation)하기 위해 아래의 프로퍼티 또�
 
 | [innerText](https://developer.mozilla.org/ko/docs/Web/API/Node/innerText) |
 | ------------------------------------------------------------ |
-| innerText 프로퍼티를 사용하여도 요소의 텍스트 콘텐츠에만 접근할 수 있다. 하지만 아래의 이유로 사용하지 않는 것이 좋다<br /><br />비표준이다. <br />CSS에 순종적이다. <br />예를 들어 CSS에 의해 비표시(visibility: hidden;)로 지정되어 있다면 텍스트가 반환되지 않는다. CSS를 고려해야 하므로 textContent 프로퍼티보다 느리다 |
-| **[innerHTML](https://developer.mozilla.org/ko/docs/Web/API/Element/innerHTML)** |
+| innerText 프로퍼티를 사용하여도 요소의 텍스트 콘텐츠에만 접근할 수 있다. 하지만 아래의 이유로 사용하지 않는 것이 좋다<br /><br />비표준이다. <br />CSS에 순종적이다. <br />예를 들어 CSS에 의해 비표시(visibility: hidden;)로 지정되어 있다면 텍스트가 반환되지 않는다. CSS를 고려해야 하므로 textContent 프로퍼티보다 느리다. |
+
+| [innerHTML](https://developer.mozilla.org/ko/docs/Web/API/Element/innerHTML) |
+| ------------------------------------------------------------ |
 | 해당 요소의 모든 자식 요소를 포함하는 모든 콘텐츠를 하나의 문자열로 취득할 수 있다. 이 문자열은 마크업을 포함한다. |
+
+
 
 ```` javascript
 const ul = document.querySelector('ul');
@@ -632,11 +642,17 @@ innerHTML 프로퍼티를 사용하지 않고 새로운 콘텐츠를 추가할 �
 | [createElement(tagName)](https://developer.mozilla.org/ko/docs/Web/API/Document/createElement) |
 | ------------------------------------------------------------ |
 | 태그이름을 인자로 전달하여 요소를 생성한다.<br />Return: HTMLElement를 상속받은 객체 <br />모든 브라우저에서 동작한다. |
-| **[createTextNode(text)](https://developer.mozilla.org/ko/docs/Web/API/Document/createTextNode)** |
+
+| [createTextNode(text)](https://developer.mozilla.org/ko/docs/Web/API/Document/createTextNode) |
+| ------------------------------------------------------------ |
 | 텍스트를 인자로 전달하여 텍스트 노드를 생성한다. <br />Return: Text 객체 <br />모든 브라우저에서 동작한다. |
-| **[appendChild(Node)](https://developer.mozilla.org/ko/docs/Web/API/Node/appendChild)** |
+
+| [appendChild(Node)](https://developer.mozilla.org/ko/docs/Web/API/Node/appendChild) |
+| ------------------------------------------------------------ |
 | 인자로 전달한 노드를 마지막 자식 요소로 DOM 트리에 추가한다. <br />Return: 추가한 노드 <br />모든 브라우저에서 동작한다. |
-| **[removeChild(Node)](https://developer.mozilla.org/ko/docs/Web/API/Node/removeChild)** |
+
+| [removeChild(Node)](https://developer.mozilla.org/ko/docs/Web/API/Node/removeChild) |
+| ------------------------------------------------------------ |
 | 인자로 전달한 노드를 DOM 트리에 제거한다. <br />Return: 추가한 노드 <br />모든 브라우저에서 동작한다. |
 
 ```` javascript
