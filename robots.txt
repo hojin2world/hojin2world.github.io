@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://hojin2world.github.io/sitemap.xml
