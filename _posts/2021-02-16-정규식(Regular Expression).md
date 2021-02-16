@@ -1,3 +1,14 @@
+---
+layout: post
+title:  "[java] 정규식"
+categories: java
+comments: true
+---
+
+~~~java
+WebElement temp = driver.findElement(By.xpath("//img[@src='web/L001/images/IMAGENAME.jpg']"));
+~~~
+
 # 정규식(Regular Expression) 
 
 정규식이란 텍스트 데이터 중에서 원하는 조건(pattern)과 일치하는 문자열을 찾아 내기 위해 사용하는 것으로 미리 정의된 기호와 문자를 이용해서 작성한 문자열을 말한다.

@@ -1,12 +1,13 @@
 ---
 layout: tag-blog
-title: JavaScript
-slug: js
+title: DB
+slug: DB
 category: Dev
 menu: false
-order: 3
+order: 1
 header-img: "/img/web-logo.png"
 description: >
-	JavaScript
+	DB
+
 ---
 
