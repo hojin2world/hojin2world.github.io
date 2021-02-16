@@ -1,7 +1,7 @@
 ---
 layout: list
 title: RPA
-slug: rpa
+slug: RPA
 menu: true
 order: 2
 description: >
