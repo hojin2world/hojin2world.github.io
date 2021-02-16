@@ -50,7 +50,7 @@ google_analytics:    #UA-92346434-1
 disqus_shortname:    
 
 # This text will appear in the footer of every page. Markdown enabled.
-copyright:           '&copy; 2021. by hojin'
+copyright:           '&copy; 2021. by Hojin Ahn'
 
 # Format of the permalinks
 permalink:           pretty
