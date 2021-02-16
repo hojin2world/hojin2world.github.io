@@ -1,7 +1,7 @@
 ---
 layout: tag-blog
 title: JavaScript
-slug: js
+slug: javascript
 category: Dev
 menu: false
 order: 3
