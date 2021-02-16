@@ -1,3 +1,11 @@
+---
+layout: post
+title:  "[javascript] html2canvas"
+categories: javascript
+comments: true
+
+---
+
 html2canvas
 =============
 
