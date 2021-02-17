@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Spring] closure()"
+title:  "[Spring]Spring Framework를 사용해야 하는 이유"
 categories: spring
 comments: true
 
@@ -31,6 +31,8 @@ comments: true
 - Portable Service Abstraction
   만약 오늘까지는 Hibernate로 ORM모듈을 사용해다가 내일 EclipseLink로 모듈이 변경되었다면, 혹은 오늘까지는 log4로 로깅을 남기다다 내일부터는 logback으로 남기고 싶을 때 스프링은 쉽게 이를 적용할 수 있습니다. 왜? Spring 별도의 추상화된 라이브러리를 적용하고 그를 이용하여 다른 라이브러리를 사용하기 때문입니다. 메시징에 대해서도 동일하게 유연하게 적용이 가능합니다.
 
+
+
 > 엔터프라이즈급 서비스를 위한 모듈 제공
 
 - AOP
@@ -60,9 +62,61 @@ comments: true
 
 
 
+> 특징
+
+* 크기와 부하의 측면에서 경량.
+
+* 제어 역행(IoC)이라는 기술을 통해 애플리케이션의 느슨한 결합을 도모.
+
+* 관점지향(AOP) 프로그래밍을 위한 풍부한 지원을 함.
+
+* 애플리케이션 객체의 생명 주기와 설정을 포함하고 관리한다는 점에서 일종의 컨테이너(Container)라고 할 수 있음.
+
+* 간단한 컴포넌트로 복잡한 애플리케이션을 구성하고 설정할 수 있음.
+
+  
+
+-스프링의 특징을 좀 더 상세히 말하자면 -
+
+1)  경량 컨테이너로서 자바 객체를 직접 관리.
+
+  각각의 객체 생성, 소멸과 같은 라이프 사이클을 관리하며 스프링으로부터 필요한 객체를 얻어올 수 있다.
+
+2)  스프링은 POJO(Plain Old Java Object) 방식의 프레임워크.
+
+  일반적인 J2EE 프레임워크에 비해 구현을 위해 특정한 인터페이스를 구현하거나 상속을 받을 필요가 없어 기존에 존재하는 라이브러리
+
+  등을 지원하기에 용이하고 객체가 가볍다.
+
+3)  스프링은 제어 반전(IoC : Inversion of Control)을 지원.
+
+  컨트롤의 제어권이 사용자가 아니라 프레임워크에 있어서 필요에 따라 스프링에서 사용자의 코드를 호출한다.
+
+4)  스프링은 의존성 주입(DI : Dependency Injection)을 지원
+
+  각각의 계층이나 서비스들 간에 의존성이 존재할 경우 프레임워크가 서로 연결시켜준다.
+
+5)  스프링은 관점 지향 프로그래밍(AOP : Aspect-Oriented Programming)을 지원
+
+  따라서 트랜잭션이나 로깅, 보안과 같이 여러 모듈에서 공통적으로 사용하는 기능의 경우 해당 기능을 분리하여 관리할 수 있다.
+
+6)  스프링은 영속성과 관련된 다양한 서비스를 지원
+
+  iBatis나 Hibernate 등 이미 완성도가 높은 데이터베이스 처리 라이브러리와 연결할 수 있는 인터페이스를 제공한다.
+
+7)  스프링은 확장성이 높음.
+
+  스프링 프레임워크에 통합하기 위해 간단하게 기존 라이브러리를 감싸는 정도로 스프링에서 사용이 가능하기 때문에 수많은 라이브러리
+
+  가 이미 스프링에서 지원되고 있고 스프링에서 사용되는 라이브러리를 별도로 분리하기도 용이하다.
+
+
+
 참고사이트
 
 - http://a07274.tistory.com/200
 - http://www.wrox.com/WileyCDA/Section/Why-Use-the-Spring-Framework-.id-130098.html
 - [http://www.tothenew.com/blog/why-should-you-adopt-spring-framework](http://www.tothenew.com/blog/why-should-you-adopt-spring-framework/)
 - https://opentutorials.org/course/2428/13633
+-  https://ooz.co.kr/170?category=818548
+- http://ko.wikipedia.org/wiki/%EC%8A%A4%ED%94%84%EB%A7%81_%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC
