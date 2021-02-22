@@ -88,7 +88,7 @@
   max-width: 100%;
   box-sizing: content-box;
   background-color: #fff;
-  height:400px;
+  /*height:400px;*/
 }
 
 .markdown-body code {
