@@ -42,6 +42,14 @@ Spring Security는 Spring 기반의 애플리케이션의 보안(인증과 권�
 
 
 
+
+
+
+
+
+
+
+
 ### **[ 인증(Authorizatoin)과 인가(Authentication) ]**
 
 - 인증(Authentication): 해당 사용자가 본인이 맞는지를 확인하는 절차
