@@ -35,7 +35,7 @@ Spring Security는 Spring 기반의 애플리케이션의 보안(인증과 권�
 
 
 
-![security2](https://user-images.githubusercontent.com/38201897/108676509-aa87c480-752b-11eb-89e3-ac4ce11a85bd.png)
+<img width="400" alt="security2" src="https://user-images.githubusercontent.com/38201897/108676509-aa87c480-752b-11eb-89e3-ac4ce11a85bd.png">
 
 
 
