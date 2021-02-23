@@ -10,7 +10,7 @@ comments: true
 
 ![mvc2_1](https://user-images.githubusercontent.com/38201897/108438600-f0762b80-7292-11eb-84f5-ca129d9a7364.png)
 
-**Model(모델) **
+**Model(모델)**
 
 어플리케이션의 데이터이며, 모든 데이터 정보를 가공하여 가지고 있는 컴포넌트이다.
 
