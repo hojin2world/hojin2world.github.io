@@ -10,16 +10,16 @@ comments: true
 
 ![mvc2_1](https://user-images.githubusercontent.com/38201897/108438600-f0762b80-7292-11eb-84f5-ca129d9a7364.png)
 
-Model(모델) 
+**Model(모델) **
 
 어플리케이션의 데이터이며, 모든 데이터 정보를 가공하여 가지고 있는 컴포넌트이다.
 
 - 사용자가 이용하려는 모든 데이터를 가지고 있어야하며, View(뷰) 또는 Controller(컨트롤러)에 대해 어떤 정보도 알 수 없어야 한다.
 - 변경이 일어나면 처리 방법을 구현해야 한다.
 
- 
+ <br/>
 
- View(뷰)
+ **View(뷰)**
 
 시각적인 UI 요소를 지칭하는 용어이다.
 
@@ -27,16 +27,16 @@ Model(모델)
 - Model(모델)이나 Controller(컨트롤러)에 대한 정보를 알면 안되며 단순히 표시해주는 역할을 가지고 있다.
 - 변경이 일어나면 처리 방법을 구현해야 한다.
 
+<br/>
 
-
-Controller(컨트롤러)
+**Controller(컨트롤러)**
 
 Model(모델)과 View(뷰)를 연결해주는 역할을 한다.
 
 - Model(모델) 또는 View(뷰)에 대한 정보를 알아야 한다.
 - Model(모델) 또는 View(뷰)의 변경을 인지하여 대처를 해야한다.
 
-
+<br/>
 
 ````
 모델2의 패턴은
@@ -46,13 +46,13 @@ Model(모델)과 View(뷰)를 연결해주는 역할을 한다.
 (요청 -> 프론트 컨트롤러 -> 핸들러 매핑 -> 핸들러 어댑터 -> 컨트롤러 -> 로직 수행(서비스) -> 컨트롤러 -> 뷰 리졸버 -> 응답(jsp, html))
 ````
 
-
+<br/>
 
 
 
 ![mvc2_2](https://user-images.githubusercontent.com/38201897/108438592-ef44fe80-7292-11eb-8039-5443ceb6cb37.png)
 
-
+<br/>
 
 **MVC의 처리 순서**
 
@@ -68,21 +68,17 @@ Model(모델)과 View(뷰)를 연결해주는 역할을 한다.
 10. DispatcherServlet는 응답할 뷰의 Render를 지시하고 뷰는 로직을 처리한다.
 11. DispatcherServlet는 클라이언트에게 Rendering된 뷰를 응답하며 요청을 마친다.
 
+<br/>
 
-
-
-
-*Front Controller의 역할은 서버로 들어오는 모든 요청을 받아서 처리합니다.
+**Front Controller의 역할은 서버로 들어오는 모든 요청을 받아서 처리합니다.**
 
 공통 처리 작업을 먼저 수행 한 후 적절한 세부컨트롤러에게 작업을 위임해주고 예외 발생시 일관된 방식으로 에러를 처리해주는 일을 합니다.
 
 이런 일들을 하기 때문에 각 컨트롤러들 사이의 중복된 코드 문제나 협업시 개발자들의 개발 방식이 다른 경우 등을 해결을 할 수 있습니다.
 
+<br/>
 
-
-
-
-*스프링에서 제공하는 FrontController인 DispatcherServlet의 역할은 무엇일까요??
+**스프링에서 제공하는 FrontController인 DispatcherServlet의 역할은 무엇일까요??**
 
 DispatcherServlet의 등장으로 엄청나게 **web.xml의 역할**이 축소 된 것입니다.
 
@@ -100,7 +96,7 @@ web.xml에서 자주 쓰이는 서블릿 매핑을 DispatcherServlet이 한다�
 
 (web.xml의 기능은 DispatcherServlet등록, 객체의 URL범위 , 필터 등이 있습니다.)
 
-
+<br/>
 
 ### Spring MVC 구현
 
@@ -189,7 +185,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 }
 ````
 
-
+<br/>
 
 #### 이외 모듈 구성
 
@@ -245,7 +241,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
 
 
-
+<br/><br/>
 
 [참조]
 
