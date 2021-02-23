@@ -173,6 +173,8 @@ return navigator.msSaveBlob(blob, 'fileName.jpg');
 
 그러나 이것도 100% 동일한 이미지로 캡쳐되진 않습니다. 캡쳐 방법이 HTML의 DOM과 CSS 속성을 캔버스에 옮겨 이미지화 시키는 것인데 일부 CSS는 지원하지 않기 때문입니다. 
 
+<br/>
 
+<br/>
 
 [참고] https://sub0709.tistory.com/48
