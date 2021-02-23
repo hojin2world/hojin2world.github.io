@@ -8,7 +8,9 @@ comments: true
 # 정규식(Regular Expression) 
 
 정규식이란 텍스트 데이터 중에서 원하는 조건(pattern)과 일치하는 문자열을 찾아 내기 위해 사용하는 것으로 미리 정의된 기호와 문자를 이용해서 작성한 문자열을 말한다.
+
 원래 Unix에서 사용한던 것이고 Perl의 강력한 기능이었는데 요즘은 Java를 비롯해 다양한 언어에서 지원하고 있다.
+
 정규식을 이용하면 많은 양의 텍스트 파일 중에서 원하는 데이터를 손쉽게 뽑아낼 수도 있고 입력된 데이터가 형식에 맞는지 체크할 수도 있다.예를들면 html문서에서 전화번호나 이메일 주소만을 따로 추출한다던가, 입력한 비밀번호가 숫자와 영문자의 조합으로 되어있는지 확인할 수 도 있다.
 
 
@@ -37,6 +39,8 @@ data라는 문자열배열에 담긴 문자열 중에서 지정한 정규식과 
 Pattern은 정규식을 정의하는데 사용되고 Matcher는 정규식을 데이터와 비교하는 역할을 한다.
 정규식을 정의하고 데이터를 비교하는 과정을 단계별로 설명하면 다음과 같다.
 
+<br/>
+
 * 정규식을 매개변수로 Pattern클래스의 static메서드인 Pattern Compile(String regex)을 호출하여 Pattern 인스턴스를 얻는다.
 
   Pattern p = Pattern.compile("c[a-z]*");
@@ -49,16 +53,17 @@ Pattern은 정규식을 정의하는데 사용되고 Matcher는 정규식을 데
 
   if(m.matches())
 
+<br/>
 
+**Pattern 클래스 주요 메서드**
 
-**Pattern** **클래스 주요 메서드
-**compile(String regex) : 주어진 정규표현식으로부터 패턴을 만듭니다.
+compile(String regex) : 주어진 정규표현식으로부터 패턴을 만듭니다.
 matcher(CharSequence input) : 대상 문자열이 패턴과 일치할 경우 true를 반환합니다.
 asPredicate() : 문자열을 일치시키는 데 사용할 수있는 술어를 작성합니다.
 pattern() : 컴파일된 정규표현식을 String 형태로 반환합니다.
 split(CharSequence input) : 문자열을 주어진 인자값 CharSequence 패턴에 따라 분리합니다.
 
-
+<br/>
 
 **Parttern 플래그 값 사용(상수)**
 
@@ -70,7 +75,7 @@ Pattern.DOTALL : 수식 ‘.’과 모든 문자와 match 되고 ‘\n’ 도 ma
 Pattern.UNICODE_CASE : 유니코드를 기준으로 대소문자 구분 없이 match 시킵니다.
 Pattert.UNIX_LINES : 수식 ‘.’ 과 ‘^’ 및 ‘$’의 match시에 한 라인의 끝을 의미하는 ‘\n’만 인식됩니다.
 
-
+<br/>
 
 **Matcher 클래스 주요 메서드**
 
