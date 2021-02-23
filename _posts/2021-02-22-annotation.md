@@ -11,7 +11,7 @@ comments: true
 
 # Annotation 이란?
 
-
+<br/>
 
 `Annotation(@)`은 사전적 의미로는 주석이라는 뜻이다.
 자바에서 `Annotation`은 코드 사이에 주석처럼 쓰이며 특별한 의미, 기능을 수행하도록 하는 기술이다.
@@ -32,11 +32,13 @@ comments: true
 2. **클래스에 어노테이션을 배치**한다.
 3. **코드가 실행되는 중**에 **Reflection을 이용하여 추가 정보를 획득하여 기능을 실시**한다.
 
+<br/>
 
-
-
+<br/>
 
 ### Reflection 이란?
+
+<br/>
 
 `Reflection`이란 **프로그램이 실행 중에 자신의 구조와 동작을 검사하고, 조사하고, 수정하는 것**이다.
 
@@ -257,9 +259,9 @@ public class PersonController{
 
 * **context에 설정된 viewResolver를 무시한다고 보면된다.**
 
+<br/>
 
-
-
+<br/>
 
 [참고]
 
