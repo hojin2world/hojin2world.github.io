@@ -10,15 +10,13 @@ comments: true
 
 # SpringSecurity 란?
 
-대부분의 시스템에서는 회원의 관리를 하고 있고, 그에 따른 인증(Authentication)과 인가(Authorization)에 대한 처리를 해주어야 한다. Spring에서는 Spring Security라는 별도의 프레임워크에서 관련된 기능을 제공하고 있는데, 이번에는 Spring Security에 대해서 알아보도록 하겠다.
-
 
 
 ## 1. Spring Security란?
 
+대부분의 시스템에서는 회원의 관리를 하고 있고, 그에 따른 인증(Authentication)과 인가(Authorization)에 대한 처리를 해주어야 한다. Spring에서는 Spring Security라는 별도의 프레임워크에서 관련된 기능을 제공하고 있는데, 이번에는 Spring Security에 대해서 알아보도록 하겠다.
 
-
-### **[ Spring Security란? ]**
+<br/>
 
 Spring Security는 Spring 기반의 애플리케이션의 보안(인증과 권한, 인가 등)을 담당하는 스프링 하위 프레임워크이다. Spring Security는 '인증'과 '권한'에 대한 부분을 Filter 흐름에 따라 처리하고 있다. Filter는 Dispatcher Servlet으로 가기 전에 적용되므로 가장 먼저 URL 요청을 받지만, Interceptor는 Dispatcher와 Controller사이에 위치한다는 점에서 적용 시기의 차이가 있다. Spring Security는 보안과 관련해서 체계적으로 많은 옵션을 제공해주기 때문에 개발자 입장에서는 일일이 보안관련 로직을 작성하지 않아도 된다는 장점이 있다.
 
@@ -40,15 +38,7 @@ Spring Security는 Spring 기반의 애플리케이션의 보안(인증과 권�
 
 여기까지 간단히 Form 로그인에 대한 플로우를 설명했다.
 
-
-
-
-
-
-
-
-
-
+<br/>
 
 ### **[ 인증(Authorizatoin)과 인가(Authentication) ]**
 
@@ -65,10 +55,6 @@ Spring Security는 기본적으로 인증 절차를 거친 후에 인가 절차�
 
 - Principal(접근 주체): 보호받는 Resource에 접근하는 대상
 - Credential(비밀번호): Resource에 접근하는 대상의 비밀번호
-
-
-
-
 
 ---------------
 
@@ -101,7 +87,7 @@ Spring Security의 인증 방식 중 전통적인 세션-쿠키 방식으로 인
 
 
 
-
+<br/>
 
 ### 2. Spring Security 모듈
 
@@ -115,19 +101,19 @@ Spring Security의 주요 모듈은 아래와 같이 구성되며 각 항목들�
 
 ![security3](https://user-images.githubusercontent.com/38201897/108676526-afe50f00-752b-11eb-8eaa-f5f8049a9ece.png)
 
-
+<br/>
 
 ### **[ SecurityContextHolder ]**
 
 SecurityContextHolder는 보안 주체의 세부 정보를 포함하여 응용프래그램의 현재 보안 컨텍스트에 대한 세부 정보가 저장된다. SecurityContextHolder는 기본적으로 SecurityContextHolder.MODE_INHERITABLETHREADLOCAL 방법과SecurityContextHolder.MODE_THREADLOCAL 방법을 제공한다.
 
- 
+ <br/>
 
 ### **[ SecurityContext ]**
 
 Authentication을 보관하는 역할을 하며, SecurityContext를 통해 Authentication 객체를 꺼내올 수 있다.
 
- 
+ <br/>
 
 ### **[ Authentication ]**
 
@@ -151,7 +137,7 @@ public interface Authentication extends Principal, Serializable {
 
 
 
-
+<br/>
 
 ### **[ UsernamePasswordAuthenticationToken ]**
 
@@ -187,7 +173,7 @@ public abstract class AbstractAuthenticationToken implements Authentication, Cre
 
 
 
-
+<br/>
 
 ### **[ AuthenticationProvider ]**
 
@@ -204,7 +190,7 @@ public interface AuthenticationProvider {
 
 
 
-
+<br/>
 
 ### **[ Authentication Manager ]**
 
@@ -291,7 +277,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-
+<br/>
 
 ### **[ UserDetails ]**
 
@@ -311,7 +297,7 @@ public interface UserDetails extends Serializable {
 
 
 
-
+<br/>
 
 ### **[ UserDetailsService ]**
 
@@ -327,7 +313,7 @@ public interface UserDetailsService {
 
 
 
-
+<br/>
 
 ### **[ Password Encoding ]**
 
@@ -347,7 +333,7 @@ public PasswordEncoder passwordEncoder(){
 
 
 
-
+<br/>
 
 ### **[ GrantedAuthority ]**
 
@@ -355,7 +341,9 @@ GrantAuthority는 현재 사용자(principal)가 가지고 있는 권한을 의�
 
 
 
+<br/>
 
+<br/>
 
 [참고]
 
