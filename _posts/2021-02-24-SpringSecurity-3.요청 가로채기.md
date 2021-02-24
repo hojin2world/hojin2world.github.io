@@ -72,7 +72,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 패스 선택 외에도 **authenticated()**와 **permitAll()**도 보안이 필요한 패스를 정의하기 위해 사용된다.
 
-**authenticated()** 메소드는 애플리케이션에 로그인된 사용자가 요청을 수행할 떄 필요하다. 만약 사용자가 인증되지 않았다면, 스프링 시큐리티 필터는 요청을 잡아내고 사용자를 로그인 페이지로 리다이렉션 해준다.
+**authenticated()** 메소드는 애플리케이션에 로그인된 사용자가 요청을 수행할 때 필요하다. 만약 사용자가 인증되지 않았다면, 스프링 시큐리티 필터는 요청을 잡아내고 사용자를 로그인 페이지로 리다이렉션 해준다.
 
 **permitAll()** 메소드는 어떠한 보안 요구 없이 요청을 허용해준다.
 
@@ -218,19 +218,19 @@ protected void configure(HttpSecurity http) throws Exception {
 }
 ````
 
-**/spitter/form** 요청이 들어올 떄, 스프링 시큐리티는 요청에서**(매번 requiresSecure()가 호출될 때)** 안전한 채널이 요구하는지 확인하고 자동적으로 요청을**HTTPS**로 리다이렉션 시켜준다.
+**/spitter/form** 요청이 들어올 때, 스프링 시큐리티는 요청에서**(매번 requiresSecure()가 호출될 때)** 안전한 채널이 요구하는지 확인하고 자동적으로 요청을**HTTPS**로 리다이렉션 시켜준다.
 
 <br/>
 
 반대로 몇몇 페이지들은 HTTPS를 통해 보낼 필요가 없다.
 
-이런 경우 requiresSecure() 대신 **requiresInsecure()**를 사용하여 항상 HTTP를 통해 전송하도록 선언해 줄 수 있다.
+이런 경우 requiresSecure() 대신 **requiresInsecure()**를 사용하여 항상 **HTTP**를 통해 전송하도록 선언해 줄 수 있다.
 
 ````java
 .antMatchers("/").requiresInsecure();
 ````
 
-**HTTPS**를 통해 **/**에 요청이 들어오면 스프링 시큐리티는 요청을 보안이 적용되지 않는 HTTP로 리다이렉션시켜 준다.
+**HTTPS**를 통해 **/**에 요청이 들어오면 스프링 시큐리티는 요청을 보안이 적용되지 않는 **HTTP**로 리다이렉션시켜 준다.
 
 채널에 대한 보안 시행에 패스를 선택하는 방법이 **authorizeRequests()**를 사용하는 것에 주목하자.
 
