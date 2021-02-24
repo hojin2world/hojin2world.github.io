@@ -172,7 +172,7 @@ protected void configure(HttpSecurity http) throws Exception {
 | **permitAll**              | 항상 참으로 평가함                                           |
 | **principal**              | 사용자의 주체 객체                                           |
 
-스프링 시큐리티의 SpEL 표현식을 사용하면, 사용자의 권한에 기반을 둔 접속 제한 이외에 더 많은 것이 가능하다.
+스프링 시큐리티의 **SpEL** 표현식을 사용하면, 사용자의 권한에 기반을 둔 접속 제한 이외에 더 많은 것이 가능하다.
 
  <br/>
 
@@ -182,7 +182,7 @@ protected void configure(HttpSecurity http) throws Exception {
 .antMatchers("/spitter/me").access("hasRole('ROLE_SPITTER') and hasIpAddress('192.168.1.2')")
 ````
 
-SpEL 기반의 보안 제약의 사용으로 가능성은 무한대다.
+**SpEL** 기반의 보안 제약의 사용으로 가능성은 무한대다.
 
 
 
@@ -192,17 +192,17 @@ SpEL 기반의 보안 제약의 사용으로 가능성은 무한대다.
 
 <br/>
 
-HTTP를 통해 데이터를 제출하는 것은 위험한 일이 될 수 있다.
+**HTTP**를 통해 데이터를 제출하는 것은 위험한 일이 될 수 있다.
 
-중요한 정보들은 반드시 암호화되어서 HTTP를 통해 전달되어야 한다.
+중요한 정보들은 반드시 암호화되어서 **HTTP**를 통해 전달되어야 한다.
 
-**HTTPS**로 작업하는 것은 매우 쉬워서 URL에서 http 뒤에 s를 붙이고 설정만 해주면 된다.
+**HTTPS**로 작업하는 것은 매우 쉬워서 **URL에서 http 뒤에 s**를 붙이고 설정만 해주면 된다.
 
 **authorizeRequests()** 메소드뿐 아니라 **configure()** 메소드에 넘겨지는 **HttpSecurity** 객체는 다양한 URL 패턴에 대한 채널 요구 사항을 선언하는 **requiresChannel()** 메소드가 있다.
 
 <br/>
 
-**requiresChannel()** 메소드는 선택한 URL에 HTTPS를 적용
+**requiresChannel()** 메소드는 선택한 URL에 **HTTPS**를 적용
 
 ````java
 @Override
