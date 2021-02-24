@@ -8,6 +8,12 @@ comments: true
 
 # Spring MVC MODEL2
 
+<br/>
+
+---------
+
+
+
 ![mvc2_1](https://user-images.githubusercontent.com/38201897/108438600-f0762b80-7292-11eb-84f5-ca129d9a7364.png)
 
 **Model(모델)**

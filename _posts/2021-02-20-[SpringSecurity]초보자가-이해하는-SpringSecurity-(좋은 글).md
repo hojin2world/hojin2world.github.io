@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Spring]초보자가 이해하는 SpringSecurity (좋은 글)"
+title:  "[Spring]초보자가 이해하는 SpringSecurity"
 categories: spring
 comments: true
 
@@ -14,6 +14,8 @@ comments: true
 --------
 
 ## 1. 스프링 시큐리티란 무엇인가?
+
+<br/>
 
 스프링 시큐리티를 이해하기 위해서 스프링 시큐리티가 무엇인지를 알아야합니다. 스프링 시큐리티 레퍼런스에서는 자바 EE 기반의 엔터프라이즈 소프트웨어 애플리케이션을 위한 포괄적인 보안 서비스들을 제공하고 오픈 플랫폼이면서 자신만의 인증 매커니즘을 간단하게 만들 수 있다고 자랑(?)하고 있습니다.
 
@@ -57,7 +59,7 @@ Basic authentication is often used with stateless clients which pass their crede
 
 <br/>
 
-with Maven
+**with Maven**
 
 ````java
 <dependencies>
@@ -75,9 +77,7 @@ with Maven
 </dependencies>
 ````
 
-<br/>
-
-with Gradle
+**with Gradle**
 
 ````
 dependencies {
@@ -86,9 +86,13 @@ dependencies {
 }
 ````
 
+<br/>
+
 ##### 2.1 Java Configuration
 
 스프링 시큐리티 레퍼런스에서는 자바 기반의 설정으로 설명하고 있습니다. 그 이유는 무엇일까요?
+
+
 
 스프링 프레임워크 3.1에서부터 어노테이션을 통한 자바 설정을 지원하기 때문에 스프링 시큐리티 3.2부터는 XML로 설정하지 않고도 간단하게 설정할 수 있도록 지원하기 때문입니다.
 
@@ -433,7 +437,7 @@ public String update(@PathVariable("userId") Long id, @ModelAttribute @Valid Use
 
 ##### 3.5 Localization
 
-스프링 시큐리티는 메시지에 대한 현지화를 지원합니다. 메시지 소스 관련 프로퍼티 파일들은 spring-security-core.jar에 포함 되어져있습니다.
+스프링 시큐리티는 메시지에 대한 현지화를 지원합니다. 메시지 소스 관련 프로퍼티 파일들은 `spring-security-core.jar`에 포함 되어져있습니다.
 
 우리는 메시지 프로퍼티 파일들을 메시지소스로 등록하면 됩니다.
 
@@ -598,7 +602,7 @@ public class AuthenticationFailureHandlerImpl extends SimpleUrlAuthenticationFai
 
 <br/>
 
-*스프링* *시큐리티* *레퍼런스에서는* *단순히* *파라미터의* *존재여부에* *따라서* *출력형태를* *지정하고* *있습니다.*
+***스프링* *시큐리티* *레퍼런스에서는* *단순히* *파라미터의* *존재여부에* *따라서* *출력형태를* *지정하고* *있습니다.***
 
 <br/>
 
@@ -606,7 +610,9 @@ public class AuthenticationFailureHandlerImpl extends SimpleUrlAuthenticationFai
 
 ## 5.  UserDetails & UserDetailsService
 
-스프링 시큐리티는 사용자 정보를 **UserDetails** 구현체로 사용합니다. 그래서 스프링 시큐리티는 **org.springframework.security.core.userdetails.User**라는 클래스를 제공합니다. 그러나, 이름과 패스워드 그리고 권한들에 대한 필드만 존재하기 때문에 이메일 정보 또는 프로필 이미지 경로 등과 같은 부가적인 정보를 담을 수 없습니다.
+스프링 시큐리티는 사용자 정보를 **UserDetails** 구현체로 사용합니다. 그래서 스프링 시큐리티는 **org.springframework.security.core.userdetails.User**라는 클래스를 제공합니다. 
+
+그러나, 이름과 패스워드 그리고 권한들에 대한 필드만 존재하기 때문에 이메일 정보 또는 프로필 이미지 경로 등과 같은 부가적인 정보를 담을 수 없습니다.
 
 <br/>
 

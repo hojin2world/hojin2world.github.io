@@ -10,9 +10,13 @@ comments: true
 
 # SpringSecurity?
 
+<br/>
 
+----------
 
-## 1. Spring Security란?
+### 1. Spring Security란?
+
+<br/>
 
 대부분의 시스템에서는 회원의 관리를 하고 있고, 그에 따른 인증(Authentication)과 인가(Authorization)에 대한 처리를 해주어야 한다. Spring에서는 Spring Security라는 별도의 프레임워크에서 관련된 기능을 제공하고 있는데, 이번에는 Spring Security에 대해서 알아보도록 하겠다.
 
