@@ -158,19 +158,19 @@ protected void configure(HttpSecurity http) throws Exception {
 
 **스프링** **시큐리티에서** **사용** **가능한** **SpEL**
 
-| 보안 표현              | 평가 내용                                                    |
-| ---------------------- | ------------------------------------------------------------ |
-| authentication         | 사용자의 인증 객체                                           |
-| denyAll                | 항상 거짓으로 평가함                                         |
-| hasAnyRole(역할  목록) | 사용자가 역할 목록 중 하나라도  역할이 있는 경우 참          |
-| hasRole(역할)          | 사용자가 주어진 역할이 있는  경우 참                         |
-| hasIpAddress(IP 주소)  | 주어진 IP 주소로부터 요청이 오는 경우 참                     |
-| isAnonymous()          | 사용자가 익명인 경우 참                                      |
-| isAuthenticated()      | 사용자가 인증된 경우 참                                      |
-| isFullyAuthenticated() | 사용자가 완전히 인증된 경우  참 (기억하기(remember-me)로는 인증되지 않음) |
-| isRememberMe()         | 사용자가 기억하기(remember-me)로 인증된 경우 참              |
-| permitAll              | 항상 참으로 평가함                                           |
-| principal              | 사용자의 주체 객체                                           |
+| 보안 표현                  | 평가 내용                                                    |
+| -------------------------- | ------------------------------------------------------------ |
+| **authentication**         | 사용자의 인증 객체                                           |
+| **denyAll**                | 항상 거짓으로 평가함                                         |
+| **hasAnyRole(역할  목록)** | 사용자가 역할 목록 중 하나라도  역할이 있는 경우 참          |
+| **hasRole(역할)**          | 사용자가 주어진 역할이 있는  경우 참                         |
+| **hasIpAddress(IP 주소)**  | 주어진 IP 주소로부터 요청이 오는 경우 참                     |
+| **isAnonymous()**          | 사용자가 익명인 경우 참                                      |
+| **isAuthenticated()**      | 사용자가 인증된 경우 참                                      |
+| **isFullyAuthenticated()** | 사용자가 완전히 인증된 경우  참 (기억하기(remember-me)로는 인증되지 않음) |
+| **isRememberMe()**         | 사용자가 기억하기(remember-me)로 인증된 경우 참              |
+| **permitAll**              | 항상 참으로 평가함                                           |
+| **principal**              | 사용자의 주체 객체                                           |
 
 스프링 시큐리티의 SpEL 표현식을 사용하면, 사용자의 권한에 기반을 둔 접속 제한 이외에 더 많은 것이 가능하다.
 
