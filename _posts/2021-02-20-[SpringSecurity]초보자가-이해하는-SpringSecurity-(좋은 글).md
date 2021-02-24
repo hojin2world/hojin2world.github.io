@@ -13,7 +13,7 @@ comments: true
 
 --------
 
-## 1. 스프링 시큐리티란 무엇인가?
+### 1. 스프링 시큐리티란 무엇인가?
 
 <br/>
 
@@ -53,7 +53,7 @@ Basic authentication is often used with stateless clients which pass their crede
 
 <br/>
 
-## 2. 스프링 시큐리티 시작하기
+### 2. 스프링 시큐리티 시작하기
 
 스프링 시큐리티는 메이븐이나 그래들같은 빌드도구를 통해 쉽게 가져올 수 있습니다.
 
@@ -222,9 +222,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
 <br/>
 
-## 3. 스프링 시큐리티 속으로 들어가기
-
-
+### 3. 스프링 시큐리티 속으로 들어가기
 
 지금까지 했던 설정들은 아주 기본적인 형태들이기 때문에 실제로 우리만의 인증 매커니즘으로 커스터마이징을 한 뒤 스프링 시큐리티에서 제공하는 부가적인 기능을 추가해야합니다.
 
@@ -525,7 +523,7 @@ public class AuthenticationFailureHandlerImpl extends SimpleUrlAuthenticationFai
 
 <br/>
 
-## 4. 스프링 시큐리티 페이지
+### 4.스프링 시큐리티 페이지
 
 스프링 시큐리티에서 제공해주는 기본 로그인 페이지 대신에 우리만의 로그인 페이지를 만들어보도록 하겠습니다.
 
@@ -608,7 +606,7 @@ public class AuthenticationFailureHandlerImpl extends SimpleUrlAuthenticationFai
 
 <br/>
 
-## 5.  UserDetails & UserDetailsService
+### 5. UserDetails & UserDetailsService
 
 스프링 시큐리티는 사용자 정보를 **UserDetails** 구현체로 사용합니다. 그래서 스프링 시큐리티는 **org.springframework.security.core.userdetails.User**라는 클래스를 제공합니다. 
 
