@@ -222,7 +222,7 @@ protected void configure(HttpSecurity http) throws Exception {
 
 <br/>
 
-반대로 몇몇 페이지들은 HTTPS를 통해 보낼 필요가 없다.
+반대로 몇몇 페이지들은 **HTTPS**를 통해 보낼 필요가 없다.
 
 이런 경우 requiresSecure() 대신 **requiresInsecure()**를 사용하여 항상 **HTTP**를 통해 전송하도록 선언해 줄 수 있다.
 
