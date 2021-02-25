@@ -55,6 +55,8 @@ Java와 같은 객체 지향 프로그래밍 언어에서 **`Reflection`을 사�
 <br/>
 [EX] reflection을 사용하면 서드 파티 라이브러리의 클래스에서 private 필드의 값을 변경할 수 있다.
 
+<br/>
+
 **Spring에서 BeanFactory라는 Container에서 객체가 호출되면 객체의 인스턴스를 생성하게 되는데 이 때 필요하게 된다. 즉, 프레임워크에서 유연성있는 동작을 위해 쓰인다.**
 
 **`Annotation` 자체는 아무런 동작을 가지지 않는 단순한 표식**일 뿐이지만, **`Reflection`을 이용하면 `Annotation`의 적용 여부와 엘리먼트 값을 읽고 처리**할 수 있다.
@@ -62,7 +64,7 @@ Java와 같은 객체 지향 프로그래밍 언어에서 **`Reflection`을 사�
 **Class에 적용된 `Annotation` 정보를 읽으려면 java.lang.Class를 이용**하고
 **필드, 생성자, 메소드에 적용된 어노테이션 정보를 읽으려면 Class의 메소드를 통해 java.lang.reflect 패키지의 배열을 얻어야 한다.**
 
-**Class.forName(), getName(), getModifier(), getFields() getPackage() **등등 여러 메소드로 정보를 얻을 수 있다.
+**Class.forName(), getName(), getModifier(), getFields() getPackage()**등등 여러 메소드로 정보를 얻을 수 있다.
 
 <br/>
 
