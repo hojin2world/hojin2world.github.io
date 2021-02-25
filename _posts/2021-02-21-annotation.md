@@ -51,7 +51,9 @@ Java와 같은 객체 지향 프로그래밍 언어에서 **`Reflection`을 사�
 또한 **새로운 객체의 인스턴스화 및 메소드 호출을 허용**한다.
 
 Java와 같은 객체 지향 프로그래밍 언어에서 **`Reflection`을 사용하여 멤버 접근 가능성 규칙을 무시할 수 있다.**
-*[EX] reflection을 사용하면 서드 파티 라이브러리의 클래스에서 private 필드의 값을 변경할 수 있다.*
+
+<br/>
+[EX] reflection을 사용하면 서드 파티 라이브러리의 클래스에서 private 필드의 값을 변경할 수 있다.
 
 **Spring에서 BeanFactory라는 Container에서 객체가 호출되면 객체의 인스턴스를 생성하게 되는데 이 때 필요하게 된다. 즉, 프레임워크에서 유연성있는 동작을 위해 쓰인다.**
 
@@ -60,7 +62,9 @@ Java와 같은 객체 지향 프로그래밍 언어에서 **`Reflection`을 사�
 **Class에 적용된 `Annotation` 정보를 읽으려면 java.lang.Class를 이용**하고
 **필드, 생성자, 메소드에 적용된 어노테이션 정보를 읽으려면 Class의 메소드를 통해 java.lang.reflect 패키지의 배열을 얻어야 한다.**
 
-Class.forName(), getName(), getModifier(), getFields() getPackage() 등등 여러 메소드로 정보를 얻을 수 있다.
+**Class.forName(), getName(), getModifier(), getFields() getPackage() **등등 여러 메소드로 정보를 얻을 수 있다.
+
+<br/>
 
 **`Reflection`을 이용하면 `Annotation` 지정만으로도 원하는 클래스를 주입할 수 있다.**
 
@@ -178,7 +182,7 @@ m.invoke(foo);
 ### @ComponentScan
 
 * @Component와 @Service, @Repository, @Controller, @Configuration이 붙은 클래스 Bean들을 찾아서 Context에 bean등록을 해주는 Annotation이다.
-* *@Component Annotation이 있는 클래스에 대하여 bean 인스턴스를 생성*
+* @Component Annotation이 있는 클래스에 대하여 bean 인스턴스를 생성
 
 * ApplicationContext.xml에 `<bean id="jeongpro" class="jeongpro" />` 과 같이 xml에 bean을 직접등록하는 방법도 있고 위와 같이 `Annotation`을 붙여서 하는 방법도 있다.
 
