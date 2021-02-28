@@ -97,6 +97,8 @@ loginID변수에 값을 할당해 주는 예
 
 스프링 시큐리티의 <security:authorize> JSP 태그는 사용자가 획득한 권한에 따라 뷰의 일부를 조건부로 렌더링한다.
 
+<br/>
+
 **ROLE_SPITTER** 권한이 있을 때만 **spittle** 폼을 보여주기 위해 <security:authorize>를 사용한 예
 
 **SpEL** 기반의 <security:authorize> 조건부 렌더링
@@ -108,9 +110,7 @@ loginID변수에 값을 할당해 주는 예
 ````
 
 **access 애트리뷰트**에는 <security:authorize> 보디의 렌더링 여부를 결정하기 위한 SpEL 표현식이 주어진다.
-
 스프링 시큐리티에서 제공하는 표현식들을 포함하여 **access 애트리뷰트**를 설정할 때 사용했던 **SpEL**의 모든 기능을 갖고 있다. 
-
 애플리케이션에 사용자명이 **"habuma"**인 사용자만이 사용 가능한 관리 기능을 표시
 
 ````java
@@ -120,9 +120,7 @@ loginID변수에 값을 할당해 주는 예
 ````
 
 **isAuthenticated()**는 사용자가 인증된 경우 참을 반환하는 메소드이다.
-
 **principal**은 사용자 주체를 의미한다. 즉, **principal.username**은 사용자명을 뜻한다.
-
 보안 설정에서 **antMatchers()** 메소드를 추가하면 /admin URL과 관련한 보안이 더 강화된다.
 
 ````java
@@ -133,10 +131,9 @@ authorizeRequests()
 
 해당 URL(/admin)은 보안이 되어서 사용 권한이 있는 사용자가 아니라면 내용을 볼수가 없다.
 
+<br/>
+
 이것을 위해 **SpEL 표현식**을 **보안 설정**과 <security:authorize> 태그의 **access 애트리뷰트** 두 곳에 선언했다.
-
 <security:authorize> 태그의 **url 애트리뷰트**로 보안설정과 <security:authorize>의 **access 애트리뷰트**의 중복을 제거할 수 있다.
-
 보안 제약이 명시적으로 선언된 **access 애트리뷰트**와 달리 **url 애트리뷰트**는 간접적인 방법으로 주어진 URL 패턴에 대한 보안 제약을 나타낸다. 
-
 스프링 시큐리티 설정에서 이미 /admin에 대한 **보안 제약**을 선언했으므로 **url 애트리뷰트**를 아래처럼 사용할 수 있다.
