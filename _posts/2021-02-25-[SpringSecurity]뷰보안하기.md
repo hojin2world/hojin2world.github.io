@@ -17,11 +17,11 @@ comments: true
 
 스프링 시큐리티의 JSP 태그 라이브러리로 뷰 레이어에서 보안을 지원한다.
 
-| JSP 태그                     | 동작                                                         |
-| ---------------------------- | ------------------------------------------------------------ |
-| <security:accesscontrollist> | 연결 제어 목록에서 권한이  부여된 사용자인 경우에만 조건부로 body의 내용을 렌더링함 |
-| <security:authentication>    | 현재 인증 상세 정보를 렌더링함                               |
-| <security:authorize>         | SpEL 표현식이  참으로 평가되거나                             |
+| JSP 태그                   | 동작                                                         |
+| -------------------------- | ------------------------------------------------------------ |
+| security:accesscontrollist | 연결 제어 목록에서 권한이  부여된 사용자인 경우에만 조건부로 body의 내용을 렌더링함 |
+| security:authentication    | 현재 인증 상세 정보를 렌더링함                               |
+| security:authorize         | SpEL 표현식이  참으로 평가되거나                             |
 
  
 
@@ -41,7 +41,7 @@ JSP 태그 라이브러리를 사용하기 위해, 사용될 모든 JSP 파일�
 
 스프링 시큐리티 JSP 태그 라이브러리가 하는 가장 간단한 것 중 하나는 사용자의 인증 정보에 쉽게 접근하는 것이다.
 
-**<security:authentication>**이 그런 동작을 위해 사용된다.
+security:authentication이 그런 동작을 위해 사용된다.
 
  <br/>
 
@@ -55,7 +55,7 @@ property 애트리뷰트는 사용자 인증 객체의 프로퍼티를 확인한
 
 <br/>
 
-**<security:authentication>** JSP 태그를 사용하여 몇가지 사용자 인증 상세 정보에 접근
+security:authentication JSP 태그를 사용하여 몇가지 사용자 인증 상세 정보에 접근
 
 | 인증 프로퍼티 | 설정                                                         |
 | ------------- | ------------------------------------------------------------ |
@@ -64,7 +64,7 @@ property 애트리뷰트는 사용자 인증 객체의 프로퍼티를 확인한
 | details       | 인증과 관련한 추가 정보(IP 주소, 인증서 일련 번호,  세선 ID 등) |
 | principal     | 사용자의 주체                                                |
 
-<security:authentication>은 뷰에 있는 프로퍼티 값을 렌더링한다.
+security:authentication은 뷰에 있는 프로퍼티 값을 렌더링한다.
 
 그리고 이 값을 변수에 할당하려면 간단히 var 애트리뷰트에 변수명을 명시한다.
 
@@ -76,10 +76,9 @@ loginID변수에 값을 할당해 주는 예
  <security:authentication property="principal.username" var="loginID" /> 
 ````
 
-변수는 기본 설정으로 페이지 범위로 생성된다. 
-하지만 요청이나 세션**(javax.servlet.jsp.PageContext)**같이 다른 범위로 생성하고 싶다면 **scope** 애트리뷰트로 명시해 줄 수 있다.
+변수는 기본 설정으로 페이지 범위로 생성된다.
 
- 
+하지만 요청이나 세션**(javax.servlet.jsp.PageContext)**같이 다른 범위로 생성하고 싶다면 **scope** 애트리뷰트로 명시해 줄 수 있다.
 
 변수를 요청 범위로 생성하려면 **scope**를 **request**로 설정한다.
 
@@ -99,7 +98,7 @@ loginID변수에 값을 할당해 주는 예
 
 이미 로그인한 사용자에게 로그인 폼이 보이거나 로그인 하지 않은 사용자에게 개별적 환영 메시지를 보여 주는 것은 아무 의미가 없다.
 
-스프링 시큐리티의 **<security:authorize>** JSP 태그는 사용자가 획득한 권한에 따라 뷰의 일부를 조건부로 렌더링한다.
+스프링 시큐리티의 <security:authorize> JSP 태그는 사용자가 획득한 권한에 따라 뷰의 일부를 조건부로 렌더링한다.
 
  <br/>
 
