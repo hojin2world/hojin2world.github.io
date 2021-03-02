@@ -76,16 +76,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 | 메소드                                                       | 설명                                   |
 | ------------------------------------------------------------ | -------------------------------------- |
-| accountExpired(boolean)                                      | 계정이 만료되었는지 아닌지를  정의     |
-| accountLocked(boolean)                                       | 계정이 잠겨 있는지 아닌지를  정의      |
-| and()                                                        | 설정을 연결하기 위해 사용              |
-| authorities(GrantedAuthority...)                             | 사용자에게 부여된 권한들을  명시       |
-| authorities(List<? extends                GrantedAuthority>) | 사용자에게 부여된 권한들을  명시       |
-| authorities(String...)                                       | 사용자에게 부여된 권한들을  명시       |
-| credentialsExpired(boolean)                                  | 자격이 만료되었는지 아닌지를  정의     |
-| disabled(boolean)                                            | 계정이 비활성화되었는지 아닌지를  정의 |
-| password(String)                                             | 사용자의 암호를 명시                   |
-| roles(String...)                                             | 사용자에게 부여된 역할을 명시          |
+| **accountExpired(boolean)**                                  | 계정이 만료되었는지 아닌지를  정의     |
+| **accountLocked(boolean)**                                   | 계정이 잠겨 있는지 아닌지를  정의      |
+| **and()**                                                    | 설정을 연결하기 위해 사용              |
+| **authorities(GrantedAuthority...)**                         | 사용자에게 부여된 권한들을  명시       |
+| **authorities(List<? extends                GrantedAuthority>)** | 사용자에게 부여된 권한들을  명시       |
+| **authorities(String...)**                                   | 사용자에게 부여된 권한들을  명시       |
+| **credentialsExpired(boolean)**                              | 자격이 만료되었는지 아닌지를  정의     |
+| **disabled(boolean)**                                        | 계정이 비활성화되었는지 아닌지를  정의 |
+| **password(String)**                                         | 사용자의 암호를 명시                   |
+| **roles(String...)**                                         | 사용자에게 부여된 역할을 명시          |
 
 authorities() 메소드의 축약으로 roles() 메소드가 사용된다.
 
