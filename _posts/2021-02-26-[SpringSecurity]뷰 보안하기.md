@@ -42,7 +42,7 @@ JSP 태그 라이브러리를 사용하기 위해, 사용될 모든 JSP 파일�
 
 스프링 시큐리티 JSP 태그 라이브러리가 하는 가장 간단한 것 중 하나는 사용자의 인증 정보에 쉽게 접근하는 것이다.
 
-**<security:authentication>**이 그런 동작을 위해 사용된다.
+<security:authentication>이 그런 동작을 위해 사용된다.
 
  <br/>
 
@@ -54,7 +54,7 @@ Hello <security:authentication property="principal" />!
 
 property 애트리뷰트는 사용자 인증 객체의 프로퍼티를 확인한다.
 
-**<security:authentication>** JSP 태그를 사용하여 몇가지 사용자 인증 상세 정보에 접근
+<security:authentication> JSP 태그를 사용하여 몇가지 사용자 인증 상세 정보에 접근
 
  <br/>
 
