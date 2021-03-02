@@ -138,9 +138,15 @@ authorizeRequests()
 
 해당 URL(/admin)은 보안이 되어서 사용 권한이 있는 사용자가 아니라면 내용을 볼수가 없다.
 
+
+
 이것을 위해 **SpEL 표현식**을 **보안 설정**과 **security:authorize** 태그의 **access 애트리뷰트** 두 곳에 선언했다.
 
+
+
 **security:authorize** 태그의 url 애트리뷰트로 보안설정과 **security:authorize**의 **access 애트리뷰트**의 중복을 제거할 수 있다.
+
+
 
 보안 제약이 명시적으로 선언된 **access 애트리뷰트**와 달리 **url 애트리뷰트**는 간접적인 방법으로 주어진 URL 패턴에 대한 보안 제약을 나타낸다.
 
