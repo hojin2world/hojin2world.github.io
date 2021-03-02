@@ -52,7 +52,7 @@ Hello <security:authentication property="principal" />!
 
 <br/>
 
-**<security:authentication** JSP 태그를 사용하여 몇가지 사용자 인증 상세 정보에 접근
+**security:authentication** JSP 태그를 사용하여 몇가지 사용자 인증 상세 정보에 접근
 
 | 인증 프로퍼티   | 설정                                                         |
 | --------------- | ------------------------------------------------------------ |
@@ -144,5 +144,5 @@ authorizeRequests()
 
 보안 제약이 명시적으로 선언된 **access 애트리뷰트**와 달리 **url 애트리뷰트**는 간접적인 방법으로 주어진 URL 패턴에 대한 보안 제약을 나타낸다.
 
- 
+
 스프링 시큐리티 설정에서 이미 /admin에 대한 보안 제약을 선언했으므로 **url 애트리뷰트**를 아래처럼 사용할 수 있다.
