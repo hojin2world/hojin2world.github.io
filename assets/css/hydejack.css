@@ -3,6 +3,8 @@
 {% capture include_to_scssify %}{% include styles/style.scss %}{% endcapture %}
 {% include copyright-header.txt %}{{ include_to_scssify | scssify }}
 @import url(//fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+@import url('https://fonts.gstatic.com');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap');
 @media(max-width: 700px) {
 .markdown-body {
@@ -30,7 +32,7 @@
 .markdown-body {
     word-spacing: 1.8px;
     letter-spacing: 0.1px;
-    font-family: 'Sunflower', serif;
+    font-family: 'Noto Sans KR', serif;
 }
 
 @media(min-width: 700px) {
