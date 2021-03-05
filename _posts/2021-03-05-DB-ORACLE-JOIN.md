@@ -28,7 +28,7 @@ comments: true
 - 두 테이블의 모든 조합 확인
 
 ```
-SELECT * FROM 테이블1, 테이블2;
+SELECT * FROM TABLE1, TABLE2;
 ```
 
 - 만약 테이블1, 테이블 2에 각 각 3개의 정보가 있다면 모든 데이터를 조합하므로 총 9개의 데이터가 나옴
@@ -43,7 +43,7 @@ SELECT * FROM 테이블1, 테이블2;
 
 ```
 SELECT a.칼럼명, b.칼럼명 ...
-FROM 테이블1 A JOIN 테이블1 B
+FROM TABLE1 A JOIN TABLE1 B
 ON A.컬럼 = B.다른컬럼 
 ```
 
@@ -51,32 +51,13 @@ ON A.컬럼 = B.다른컬럼
 
 ### INNER JOIN 사용법
 
-- 조건에 부합하는 두 테이블의 데이터를 합치는 방식
-- 컬럼 사용 시 테이블 구분이 필요
+- 두 테이블에 교집합이라고 생각하면 된다 
+- 두 테이블에 공통된 값을 출력해준다
 
 ```
-SELECT a컬럼명, b.컬럼명 etc... FROM TABLE_NAME  a, TABLE_NAME b
-WHERE a.조건컬럼 == b.조건컬럼 (그외 조건이 있다면 추가)
-```
-
-- INNER JOIN ANSI JOIN
-- WHERE절에 조건이 길어지만 AND가 많이 늘어남
-- 결과는 같은데 표기법이 다름
-
-```
-SELECT a.칼럼명, b.칼럼명 ...
-FROM 테이블1 A JOIN테이블2 B
-ON 조건
-```
-
-- 3개 이상의 테이블 JOIN
-
-```
-SELECT a.칼럼명, b.칼럼명 ...
-FROM 테이블1 A, 테이블2 B
-ON 조건
-JOIN 테이블3
-ON 조건
+SELECT * FROM TABLEA
+INNER JOIN TABLEB
+ON TABLEA.컬럼 = TABLEB.컬럼
 ```
 
 <br/>
@@ -87,35 +68,10 @@ ON 조건
 * 공통된 값들은 공통된 값끼리 묶어져서 나오고, 공통되지 않은 값들도 모두 다 출력됨
 
 ````
-SELECT * FROM TABLEA
-FROM OUTER JOIN TABLEB
-ON TABLEA.칼럼명 = TABLEB.칼럼명
+SELECT [TABLEA.]속성명,[TABLEB]속성명 
+FROM TABLEA FULL OUTER JOIN TABLEB
+ON TABLEA.컬럼 = TABLEB.컬럼
 ````
-
-<br/>
-
-### OUTER JOIN
-
-- INNER JOIN 사용시 테이블 데이터가 매칭되지 않은 정보는 볼 수 없음
-- 데이터가 매칭 되지 않더라도 한쪽의 테이블을 전부 보고 싶을 때 OUTER JOIN을 사용함
-- 매칭되는 데이터가 없을 때 NULL이 표시
-- (OUTER JOIN 연산자) + 표시는 전체를 보고 싶은쪽 반대편에 붙이도록 함
-
-```
-SELECT A.칼럼, B.칼럼 ..
-FROM TALBLE1 A, TABLE2 B
-WHERE A.칼럼 = B.칼럼(+)
-```
-
-- OUTER JOIN ANSI JOIN
-- 전체 데이터를 보고 싶은 쪽을 JOIN에 지정
-- 왼쪽 테이블의 데이터를 전체 출력하고 싶다면 LEFT JOIN, 오른쪽일 경우 RIGHT JOIN
-
-```
-SELECT TABLE1 A, TABLE2 B
-FROM TABLE1 A LEFT JOIN TABLE2 B
-ON A.칼럼 = B.칼럼
-```
 
 <br/>
 
@@ -149,10 +105,16 @@ ON TABLEB.칼럼 = TABLEA.칼럼
 
 ### SUB QUERY
 
+- 하나의 SQL문 안에 포함되어 있는 또 다른 SQL문을 말함
 - 예를들어 ‘평균 연봉보다 많은 사람만 출력하시오’란 예제가 있다면 먼저 평균연봉을 구해야한다
 - 이 때 평균연봉을 구한 후 결과를 복사해서 비교하면 2번 실행해야하므로 비효율적이다
 - SUB QUERY를 사용해서 결과값을 구한 후 메인쿼리에서 사용할 수 있다
 - 서브쿼리를 먼저 작성 후 메인쿼리를 작성한다
+- 서브쿼리 작성시 주의사항
+  * 서브쿼리 부분은 WHERE절에 연산자 오른쪽에 위치해야 한다.
+  * 반드시 괄호로 묶어야 한다.
+  * 특별한 경우를 제외하고는 서브쿼리절에 order by 절이 올 수 없다.
+  * 단일행 서브쿼리와 다중행 서브쿼리에 따라 연산자를 잘 선택해야한다.
 
 ```
 SELECT TABLE1 칼럼
