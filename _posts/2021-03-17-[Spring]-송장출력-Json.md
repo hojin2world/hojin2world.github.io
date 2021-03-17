@@ -138,7 +138,7 @@ StatsDAO
 
 stats.xml
 
-````java
+````sql
 <select id="getOrderStats" parameterType="orderSearchCondition" resultType="order" >
 		/* stats.getOrderStats */
 		SELECT `seq`, `userid`,`usercode`, `order_status`, `item`,`item_code`, `shape`, `process`, `background`, `width`, `height`, `depth`, `count`, `price`,`purchase_price`,
