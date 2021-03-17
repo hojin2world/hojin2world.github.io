@@ -121,82 +121,83 @@ comments: true
 <br/>
 
 ### OTP 발급받기
-
-@RequestMapping(value = "/order/getList", method = {RequestMethod.POST,RequestMethod.GET})
-@ResponseBody	
-public Map<String, Object> getOrder(ModelMap model,@ModelAttribute OrderSearchCondition condition , HttpSession session) throws Exception {
 	
+
 ```java
-Map<String, Object> result = Maps.newHashMap();
-String customer = condition.getCustomer();
-if (StringUtils.isNotEmpty(customer)) {
-	String userid = userMapper.getIdByName(customer);
-	condition.setUserid(userid);
-}
+@RequestMapping(value = "/order/getList", method = {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody	
+	public Map<String, Object> getOrder(ModelMap model,@ModelAttribute OrderSearchCondition condition , HttpSession session) throws Exception {
+		
+		Map<String, Object> result = Maps.newHashMap();
+		String customer = condition.getCustomer();
+		if (StringUtils.isNotEmpty(customer)) {
+			String userid = userMapper.getIdByName(customer);
+			condition.setUserid(userid);
+		}
+		
+		if (userService.isCompanyStaff(getUserId())) {
+			condition.setUserid(getUserId());
+		}
+		boolean isSuccess = service.getOrderStats(result, condition);
+		System.out.println(condition);
+		model.addAttribute("resultList", service.getOrderStatsForPrint(condition));
+		System.out.println(service.getOrderStatsForPrint(condition));
+		System.out.println(service.getOrderStats(result, condition));
+		String targetURL = "https://test.delApi.com/del/api/v2/otps/partner/partnerCode";
+    	URL url = null;
+    	url = new URL(targetURL);
+    	HttpURLConnection urlConn = null;
+    	urlConn = (HttpURLConnection)url.openConnection();
+    	urlConn.setDoInput(true);
+    	urlConn.setDoOutput(true);
+    	urlConn.setRequestMethod("POST");
+    	urlConn.setRequestProperty("Accept", "application/json");
+    	urlConn.setRequestProperty("Content-Type", "application/json;charset=utf-8");
+    	urlConn.setRequestProperty("delApi-Api-Key", "[delApi-Api-Key]");
+    	urlConn.setDoOutput(true);
+    	urlConn.connect();
+		
+    	OutputStream output = null;
+    	output = new DataOutputStream(urlConn.getOutputStream());
+    	output.writeBytes(data.toString());
+    	output.write(targetURL.getBytes("UTF-8"));
+    	output.flush();
+    	output.close();
 
-if (userService.isCompanyStaff(getUserId())) {
-	condition.setUserid(getUserId());
-}
-boolean isSuccess = service.getOrderStats(result, condition);
-System.out.println(condition);
-model.addAttribute(service.getOrderStatsForPrint(condition));
-service.getOrderStatsForPrint(condition));
-System.out.println(service.getOrderStats(result, condition));
-   
-String targetURL = "https://test.delApi.com/delivery/api/v2/otp/partner/partnerCode";
-URL url = null;
-url = new URL(targetURL);
-HttpURLConnection urlConn = null;
-urlConn = (HttpURLConnection)url.openConnection();
-urlConn.setDoInput(true);
-urlConn.setDoOutput(true);
-urlConn.setRequestMethod("POST");
-urlConn.setRequestProperty("Accept", "application/json");
-urlConn.setRequestProperty("Content-Type", "application/json;charset=utf-8");
-urlConn.setRequestProperty("delApi-Api-Key", "[delApi-Api-Key]");
-urlConn.setDoOutput(true);
-urlConn.connect();
+    	DataInputStream input = new DataInputStream(urlConn.getInputStream());
+    	BufferedInputStream bis = new BufferedInputStream(urlConn.getInputStream());
+    	BufferedReader dis = new BufferedReader(new InputStreamReader(bis));
+    	
+    	int responseCode = urlConn.getResponseCode();
+    	BufferedReader br;
+    	if(responseCode == 200) {//SUCCESS
+    		br = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+    		
+    	}else { //ERROR
+    		br = new BufferedReader(new InputStreamReader(urlConn.getErrorStream()));
+    		System.out.println("ERROR");
+    	}
+    	String inputLine;
+    	StringBuffer response = new StringBuffer();
+    	while((inputLine = br.readLine()) != null){
+    		response.append(inputLine);
+    	}
+    	br.close();
+    	System.out.println(response.toString());
+    	
+    	JSONParser parser = new JSONParser();
+    	JSONObject obj = (JSONObject) parser.parse(response.toString());
+    	obj.values();
+    	String otpData = (String) obj.get("data");
+    	System.out.println(obj.values());
+    	System.out.println(otpData);
+    	
+    	condition.setOtp(otpData);
+    	System.out.println(condition.getOtp());
+    	session.setAttribute("OTP", otpData);
+		return getFormattedResult(true, result);
+	}
 
-OutputStream output = null;
-output = new DataOutputStream(urlConn.getOutputStream());
-output.writeBytes(data.toString());
-output.write(targetURL.getBytes("UTF-8"));
-output.flush();
-output.close();
-
-DataInputStream input = new DataInputStream(urlConn.getInputStream());
-BufferedInputStream bis = new BufferedInputStream(urlConn.getInputStream());
-BufferedReader dis = new BufferedReader(new InputStreamReader(bis));
-
-int responseCode = urlConn.getResponseCode();
-BufferedReader br;
-if(responseCode == 200) {//SUCCESS
-	br = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
-	
-}else { //ERROR
-	br = new BufferedReader(new InputStreamReader(urlConn.getErrorStream()));
-	System.out.println("ERROR");
-}
-String inputLine;
-StringBuffer response = new StringBuffer();
-while((inputLine = br.readLine()) != null){
-	response.append(inputLine);
-}
-br.close();
-System.out.println(response.toString());
-
-JSONParser parser = new JSONParser();
-JSONObject obj = (JSONObject) parser.parse(response.toString());
-obj.values();
-String otpData = (String) obj.get("data");
-System.out.println("===============response========"+obj.values());
-System.out.println("-------------------------------"+otpData);
-
-condition.setOtp(otpData);
-System.out.println("--------------------------------"+condition.getOtp());
-session.setAttribute("OTP", otpData);
-return getFormattedResult(true, result);
-}
 ```
 
 
