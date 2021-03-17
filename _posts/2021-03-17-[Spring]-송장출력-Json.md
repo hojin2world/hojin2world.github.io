@@ -118,6 +118,69 @@ comments: true
 	}	
 ````
 
+StatsService
+
+````java
+	public List<Order> getOrderStatsForPrint(OrderSearchCondition condition) throws Exception {
+		List<Order> resultList = statsDao.getOrderStats(condition);
+		restructOrderStats(resultList);		
+		return resultList;
+	}
+````
+
+StatsDAO
+
+````java
+	public List<Order> getOrderStats(OrderSearchCondition condition) throws SQLException 	{
+		return getSql().selectList(NAMESPACE_PREFIX + "getOrderStats", condition);
+	}
+````
+
+stats.xml
+
+````java
+<select id="getOrderStats" parameterType="orderSearchCondition" resultType="order" >
+		/* stats.getOrderStats */
+		SELECT `seq`, `userid`,`usercode`, `order_status`, `item`,`item_code`, `shape`, `process`, `background`, `width`, `height`, `depth`, `count`, `price`,`purchase_price`,
+        `support_select`, `design_select`, `sender_postcode`,`sender_address`,`sender_detailaddress`, `sender_name`, `sender_phone`, `workerid`, `description`, `team`, `outlet`, `purchaseprice`,`unitprice`,`designprice`,
+        `outlet_detail`, `outlet_detail_code`, `fromDate`, `invoice_info`, `invoice_number`,`uniquecd`, `registered`, `modified`, `company`
+        FROM `order`
+    WHERE date_format(`registered`, '%Y-%m-%d') BETWEEN #{fromDate} AND #{toDate} 
+		AND `company` = #{company}
+		<if test="orderStatus != null and orderStatus != ''">
+		AND order_status = #{orderStatus}
+		</if>
+		<if test="item != null and item != ''">
+		AND item = #{item}
+		</if>
+		<if test="isCompanyEmployee">
+		AND `userid` = #{userid}
+		</if>
+		<if test="userid != null and userid != ''">
+		AND `userid` = #{userid}
+		</if>
+		<if test="team != null and team != ''">
+		AND team = #{team}
+		</if>
+		<if test="outlet != null and outlet != ''">
+		AND outlet = #{outlet}
+		</if>
+		<if test="outlet_detail != null and outlet_detail != ''">
+		AND outlet_detail = #{outlet_detail}
+		</if>
+		<if test="isUnitZero">
+		AND count = 0
+		</if>
+		<if test="isPriceZero">
+		AND price = 0
+		</if>
+	</select>
+````
+
+
+
+
+
 <br/>
 
 ### OTP 발급받기
@@ -195,10 +258,19 @@ comments: true
     	condition.setOtp(otpData);
     	System.out.println(condition.getOtp());
     	session.setAttribute("OTP", otpData);
+        
 		return getFormattedResult(true, result);
 	}
 
 ```
+````java
+	public List<Order> getOrderStatsForPrint(OrderSearchCondition condition) throws Exception {
+		List<Order> resultList = statsDao.getOrderStats(condition);
+		restructOrderStats(resultList);		
+		return resultList;
+	}
+````
+
 
 
 <br/>
@@ -255,11 +327,7 @@ comments: true
 		session.getAttribute("id");
 		session.getAttribute("OTP");
 		session.setAttribute("responseURL", "result");
-
-		
-		
-		
-		
+	
         String url = "https://test.delApi.com/print/송장출력.aspx";
         String urlParameters = "?id="+id
                 +"&OTP="+otp+"&responseURL="+responseURL;
@@ -333,5 +401,24 @@ comments: true
 		model.addAttribute("resultList", service.getOrderStatsForPrint(condition));
 		return "stats/print";
 	}
+````
+
+<br/>
+
+### getFormattedResult
+
+````java
+public class CommonController {
+	
+	@Autowired
+    UserService userService;
+
+    public Map<String, Object> getFormattedResult(boolean success, Object result){
+        HashMap<String, Object> returnMap = Maps.newHashMap();
+        returnMap.put("returnValue", result);
+        returnMap.put("success", success);
+        return returnMap;
+    }
+}
 ````
 
