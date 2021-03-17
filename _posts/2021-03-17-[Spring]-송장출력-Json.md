@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Spring] 송장출력 - Json"
-categories: Spring
+categories: spring
 comments: true
 
 ---
@@ -184,7 +184,7 @@ stats.xml
 <br/>
 
 ### OTP 발급받기
-	
+
 
 ```java
 @RequestMapping(value = "/order/getList", method = {RequestMethod.POST,RequestMethod.GET})
