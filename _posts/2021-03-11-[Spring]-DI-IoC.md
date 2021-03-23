@@ -296,7 +296,7 @@ public class Main {
 
 **(2)어노테이션을 이용한 DI**
 
-**(3)JavaConfig에 의한 DI가 있습니다. **
+**(3)JavaConfig에 의한 DI가 있습니다.**
 
 <br/>
 
