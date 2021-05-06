@@ -21,7 +21,7 @@ COLLATE='utf8mb4_unicode_ci'
 ENGINE=InnoDB;
 ````
 
-간단한 직원출석 테이블을 생성한다.
+**간단한 직원출석 테이블을 생성한다.**
 
 <br/>
 
