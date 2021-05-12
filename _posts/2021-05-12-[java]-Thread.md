@@ -10,7 +10,9 @@ comments: true
 
 #### 쓰레드의 개념 및 기본 예제
 
-##### 프로세스와 쓰레드
+<br/>
+
+#### 프로세스와 쓰레드
 
 **프로세스**
 
@@ -40,9 +42,9 @@ comments: true
 
 #### 쓰레드의 생성
 
-1. Thread 클래스로부터 직접 생성
+**1.Thread 클래스로부터 직접 생성**
 
-```
+```java
 Thread thread = new Thread(Runnable target);
 ```
 
@@ -54,7 +56,7 @@ Thread thread = new Thread(Runnable target);
 
 \- 코드를 실행하기 위해서는 run 메소드 호출이 아닌 start()를 호출해야함.
 
-```
+```java
 Runnable taskrun = new Task();
 Thread thread = new Thread(taskrun);
 Thread threadanony = new Thread( new Runnable(){
@@ -64,11 +66,11 @@ Thread threadanony = new Thread( new Runnable(){
 });
 ```
 
-2. Thread 하위 클래스로부터 생성.
+**2.Thread 하위 클래스로부터 생성.**
 
 \- Thread 클래스를 상속해야함.
 
-```
+```java
 import java.awt.Toolkit;
 
 public class BeepThread extends Thread{
@@ -85,7 +87,7 @@ public class BeepThread extends Thread{
 
 \- 0.5초마다 비프소리를 내는 쓰레드 하위 클래스 생성.
 
-```
+```java
 import java.awt.Toolkit;
 
 public class BeepPrintExample3 {
@@ -131,20 +133,20 @@ public class BeepPrintExample3 {
 
 \- getName() 메소드로 쓰레드 이름을 반환.
 
-```
+```java
 thread.setName("쓰레드명");
 thread.getName(); // 쓰레드명 반환
 ```
 
 \- currentThread()로 현재 코드를 실행하고 있는 쓰레드의 참조를 얻어올 수 있음
 
-```
+```java
 Thread thread = Thread.currentThread();
 ```
 
 간단 예제
 
-```
+```java
 public class ThreadNameExample {
 	public static void main(String[] args) {
 		Thread mainThread = Thread.currentThread();
@@ -212,7 +214,7 @@ public class ThreadB extends Thread{
 
 \- 1부터 10까지 우선순위, 높으면 먼저 실행
 
-```
+```java
 thread.setPriority(우선순위);
 ```
 
@@ -224,7 +226,7 @@ thread.setPriority(우선순위);
 
  
 
-```
+```java
 public class PriorityExample {
 	public static void main(String[] args) {
 		for(int i =1; i<=10; i++) {
@@ -759,7 +761,7 @@ Name : Reference Handler(데몬)
 
 \- 예제
 
-```
+```java
 public class WorkThread extends Thread{
 	public WorkThread(ThreadGroup threadGroup, String threadName) {
 		super(threadGroup, threadName);
@@ -904,7 +906,7 @@ Callable<T> taskc = new Callable<T>(){
 
 (이는 쓰레드이름을 통해 확인할 수 있다.)
 
-```
+```java
 public static void main(String[] args) throws Exception{
 		ExecutorService executorService = Executors.newFixedThreadPool(2); //최대쓰레드 개수가 2인 쓰레드풀 생성
 		
